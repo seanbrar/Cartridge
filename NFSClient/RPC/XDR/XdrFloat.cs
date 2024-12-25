@@ -24,14 +24,14 @@ namespace NFSLibrary.RPC.XDR
             return this.value;
         }
 
-        public void XdrEncode(XdrEncodingStream xdr)
+        void IXdrData.XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.XdrEncodeFloat(value);
+            xdr.xdrEncodeFloat(value);
         }
 
-        public void XdrDecode(XdrDecodingStream xdr)
+        void IXdrData.XdrDecode(XdrDecodingStream xdr)
         {
-            value = xdr.XdrDecodeFloat();
+            value = xdr.xdrDecodeFloat();
         }
     }
 }

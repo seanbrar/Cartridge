@@ -7,12 +7,12 @@ namespace NFSClient.RPC.XDR
     /// </summary>
     public sealed class XdrVoid : IXdrData
     {
-        public void XdrEncode(XdrEncodingStream xdr)
+        void IXdrData.XdrEncode(XdrEncodingStream xdr)
         {
             // No data to encode
         }
 
-        public void XdrDecode(XdrDecodingStream xdr)
+        void IXdrData.XdrDecode(XdrDecodingStream xdr)
         {
             // No data to decode
         }

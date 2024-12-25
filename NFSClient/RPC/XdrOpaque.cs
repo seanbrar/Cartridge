@@ -24,12 +24,12 @@ namespace NFSLibrary.RPC
             return this.value;
         }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        void IXdrData.XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeOpaque(value);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        void IXdrData.XdrDecode(XdrDecodingStream xdr)
         {
             value = xdr.xdrDecodeOpaque();
         }

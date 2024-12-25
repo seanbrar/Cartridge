@@ -124,5 +124,10 @@ namespace NFSLibrary.RPC.XDR
             if (_position + needed > _buffer.Length)
                 throw new InvalidOperationException("Buffer overflow");
         }
+
+        public override void Dispose()
+        {
+            // No unmanaged resources to dispose
+        }
     }
 } 
