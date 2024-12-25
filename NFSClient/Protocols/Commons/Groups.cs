@@ -3,7 +3,7 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {
@@ -18,21 +18,21 @@ namespace NFSLibrary.Protocols.Commons
         { this._value = value; }
 
         public Groups(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             if (this._value != null)
             {
-                xdr.xdrEncodeBoolean(true);
-                this._value.xdrEncode(xdr);
+                xdr.XdrEncodeBoolean(true);
+                this._value.XdrEncode(xdr);
             }
-            else { xdr.xdrEncodeBoolean(false); };
+            else { xdr.XdrEncodeBoolean(false); };
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._value = xdr.xdrDecodeBoolean() ? new GroupNode(xdr) : null;
+            this._value = xdr.XdrDecodeBoolean() ? new GroupNode(xdr) : null;
         }
 
         public GroupNode Value
@@ -51,15 +51,15 @@ namespace NFSLibrary.Protocols.Commons
         { }
 
         public GroupNode(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._grname.xdrEncode(xdr);
-            this._grnext.xdrEncode(xdr);
+            this._grname.XdrEncode(xdr);
+            this._grnext.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._grname = new Name(xdr);
             this._grnext = new Groups(xdr);

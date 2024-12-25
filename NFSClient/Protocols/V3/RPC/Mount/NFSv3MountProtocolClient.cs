@@ -4,7 +4,8 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
+using NFSLibrary.RPC.OncRpc;
 using System.Net;
 
 /**
@@ -14,6 +15,9 @@ using System.Net;
  */
 namespace NFSLibrary.Protocols.V3.RPC.Mount
 {
+    /// <summary>
+    /// Client implementation for the MOUNT_PROGRAM remote program.
+    /// </summary>
     public class NFSv3MountProtocolClient : OncRpcClientStub
     {
 
@@ -109,9 +113,9 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
          */
         public void MOUNTPROC3_NULL()
         {
-            XdrVoid args_ = XdrVoid.XDR_VOID;
-            XdrVoid result_ = XdrVoid.XDR_VOID;
-            client.call(NFSv3MountProtocol.MOUNTPROC3_NULL, NFSv3MountProtocol.MOUNTVERS, args_, result_);
+            XdrVoid args = XdrVoid.XDR_VOID;
+            XdrVoid result = XdrVoid.XDR_VOID;
+            Call(NFSv3MountProtocol.MOUNTPROC3_NULL, args, result);
         }
 
         /**
@@ -123,11 +127,9 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
          */
         public MountStatus MOUNTPROC3_MNT(Name arg1)
         {
-            MountStatus result_ = new MountStatus();
-
-            client.call(NFSv3MountProtocol.MOUNTPROC3_MNT, NFSv3MountProtocol.MOUNTVERS, arg1, result_);
-
-            return result_;
+            MountStatus result = new MountStatus();
+            Call(NFSv3MountProtocol.MOUNTPROC3_MNT, arg1, result);
+            return result;
         }
 
         /**
@@ -138,12 +140,10 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
          */
         public MountList MOUNTPROC3_DUMP()
         {
-            XdrVoid args_ = XdrVoid.XDR_VOID;
-            MountList result_ = new MountList();
-
-            client.call(NFSv3MountProtocol.MOUNTPROC3_DUMP, NFSv3MountProtocol.MOUNTVERS, args_, result_);
-
-            return result_;
+            XdrVoid args = XdrVoid.XDR_VOID;
+            MountList result = new MountList();
+            Call(NFSv3MountProtocol.MOUNTPROC3_DUMP, args, result);
+            return result;
         }
 
         /**
@@ -154,9 +154,8 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
          */
         public void MOUNTPROC3_UMNT(Name arg1)
         {
-            XdrVoid result_ = XdrVoid.XDR_VOID;
-
-            client.call(NFSv3MountProtocol.MOUNTPROC3_UMNT, NFSv3MountProtocol.MOUNTVERS, arg1, result_);
+            XdrVoid result = XdrVoid.XDR_VOID;
+            Call(NFSv3MountProtocol.MOUNTPROC3_UMNT, arg1, result);
         }
 
         /**
@@ -166,10 +165,9 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
          */
         public void MOUNTPROC3_UMNTALL()
         {
-            XdrVoid args_ = XdrVoid.XDR_VOID;
-            XdrVoid result_ = XdrVoid.XDR_VOID;
-
-            client.call(NFSv3MountProtocol.MOUNTPROC3_UMNTALL, NFSv3MountProtocol.MOUNTVERS, args_, result_);
+            XdrVoid args = XdrVoid.XDR_VOID;
+            XdrVoid result = XdrVoid.XDR_VOID;
+            Call(NFSv3MountProtocol.MOUNTPROC3_UMNTALL, args, result);
         }
 
         /**
@@ -180,12 +178,10 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
          */
         public Exports MOUNTPROC3_EXPORT()
         {
-            XdrVoid args_ = XdrVoid.XDR_VOID;
-            Exports result_ = new Exports();
-
-            client.call(NFSv3MountProtocol.MOUNTPROC3_EXPORT, NFSv3MountProtocol.MOUNTVERS, args_, result_);
-
-            return result_;
+            XdrVoid args = XdrVoid.XDR_VOID;
+            Exports result = new Exports();
+            Call(NFSv3MountProtocol.MOUNTPROC3_EXPORT, args, result);
+            return result;
         }
 
     }

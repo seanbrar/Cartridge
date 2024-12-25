@@ -3,7 +3,7 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {
@@ -18,21 +18,21 @@ namespace NFSLibrary.Protocols.Commons
         { this._value = value; }
 
         public Exports(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             if (this._value != null)
             {
-                xdr.xdrEncodeBoolean(true);
-                this._value.xdrEncode(xdr);
+                xdr.XdrEncodeBoolean(true);
+                this._value.XdrEncode(xdr);
             }
-            else { xdr.xdrEncodeBoolean(false); };
+            else { xdr.XdrEncodeBoolean(false); };
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._value = xdr.xdrDecodeBoolean() ? new ExportNode(xdr) : null;
+            this._value = xdr.XdrDecodeBoolean() ? new ExportNode(xdr) : null;
         }
 
         public ExportNode Value
@@ -52,16 +52,16 @@ namespace NFSLibrary.Protocols.Commons
         { }
 
         public ExportNode(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._mountpath.xdrEncode(xdr);
-            this._exgroups.xdrEncode(xdr);
-            this._next.xdrEncode(xdr);
+            this._mountpath.XdrEncode(xdr);
+            this._exgroups.XdrEncode(xdr);
+            this._next.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._mountpath = new Name(xdr);
             this._exgroups = new Groups(xdr);

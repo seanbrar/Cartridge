@@ -3,7 +3,7 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC.Mount
 {
@@ -18,21 +18,21 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
         { this._value = value; }
 
         public MountList(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             if (this._value != null)
             {
-                xdr.xdrEncodeBoolean(true);
-                this._value.xdrEncode(xdr);
+                xdr.XdrEncodeBoolean(true);
+                this._value.XdrEncode(xdr);
             }
-            else { xdr.xdrEncodeBoolean(false); };
+            else { xdr.XdrEncodeBoolean(false); };
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._value = xdr.xdrDecodeBoolean() ? new MountBody(xdr) : null;
+            this._value = xdr.XdrDecodeBoolean() ? new MountBody(xdr) : null;
         }
 
         public MountBody Value

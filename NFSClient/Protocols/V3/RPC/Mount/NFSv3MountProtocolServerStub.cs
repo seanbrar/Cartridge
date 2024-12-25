@@ -4,9 +4,9 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
+using NFSLibrary.RPC.OncRpc;
 using System.Net;
-using org.acplt.oncrpc.server;
 
 /**
  */
@@ -14,7 +14,6 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
 {
     public abstract class NFSv3MountProtocolServerStub : OncRpcServerStub, OncRpcDispatchable
     {
-
         public NFSv3MountProtocolServerStub()
             : this(0)
         { }
@@ -23,99 +22,65 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
             : this(null, port)
         { }
 
-        public NFSv3MountProtocolServerStub(IPAddress bindAddr, int port)
+        public NFSv3MountProtocolServerStub(IPAddress? bindAddr, int port)
+            : base(bindAddr ?? IPAddress.Any, port)
         {
-            info = new OncRpcServerTransportRegistrationInfo[] {
-            new OncRpcServerTransportRegistrationInfo(NFSv3MountProtocol.MOUNTPROG, 3),
-        };
-
-            transports = new OncRpcServerTransport[] {
-            new OncRpcUdpServerTransport(this, bindAddr, port, info, 32768),
-            new OncRpcTcpServerTransport(this, bindAddr, port, info, 32768)
-        };
         }
 
-        public void dispatchOncRpcCall(OncRpcCallInformation call, int program, int version, int procedure)
+        public void DispatchOperation(int procedure, XdrDecodingStream xdr, XdrEncodingStream xdr2)
         {
-            if (version == 3)
+            switch (procedure)
             {
-                switch (procedure)
-                {
-                    case 0:
-                        {
-                            call.retrieveCall(XdrVoid.XDR_VOID);
-                            MOUNTPROC3_NULL();
-                            call.reply(XdrVoid.XDR_VOID);
+                case NFSv3MountProtocol.MOUNTPROC3_NULL:
+                    {
+                        MOUNTPROC3_NULL();
+                        break;
+                    }
+                case NFSv3MountProtocol.MOUNTPROC3_MNT:
+                    {
+                        Name args = new Name();
+                        args.XdrDecode(xdr);
 
-                            break;
-                        }
-                    case 1:
-                        {
-                            Name args_ = new Name();
-                            call.retrieveCall(args_);
+                        MountStatus result = MOUNTPROC3_MNT(args);
+                        result.XdrEncode(xdr2);
+                        break;
+                    }
+                case NFSv3MountProtocol.MOUNTPROC3_DUMP:
+                    {
+                        MountList result = MOUNTPROC3_DUMP();
+                        result.XdrEncode(xdr2);
+                        break;
+                    }
+                case NFSv3MountProtocol.MOUNTPROC3_UMNT:
+                    {
+                        Name args = new Name();
+                        args.XdrDecode(xdr);
 
-                            MountStatus result_ = MOUNTPROC3_MNT(args_);
-                            call.reply(result_);
-
-                            break;
-                        }
-                    case 2:
-                        {
-                            call.retrieveCall(XdrVoid.XDR_VOID);
-                            MountList result_ = MOUNTPROC3_DUMP();
-                            call.reply(result_);
-
-                            break;
-                        }
-                    case 3:
-                        {
-                            Name args_ = new Name();
-                            call.retrieveCall(args_);
-
-                            MOUNTPROC3_UMNT(args_);
-                            call.reply(XdrVoid.XDR_VOID);
-
-                            break;
-                        }
-                    case 4:
-                        {
-                            call.retrieveCall(XdrVoid.XDR_VOID);
-                            MOUNTPROC3_UMNTALL();
-                            call.reply(XdrVoid.XDR_VOID);
-
-                            break;
-                        }
-                    case 5:
-                        {
-                            call.retrieveCall(XdrVoid.XDR_VOID);
-                            Exports result_ = MOUNTPROC3_EXPORT();
-                            call.reply(result_);
-                            
-                            break;
-                        }
-                    default:
-                        {
-                            call.failProcedureUnavailable();
-                            break;
-                        }
-                }
+                        MOUNTPROC3_UMNT(args);
+                        break;
+                    }
+                case NFSv3MountProtocol.MOUNTPROC3_UMNTALL:
+                    {
+                        MOUNTPROC3_UMNTALL();
+                        break;
+                    }
+                case NFSv3MountProtocol.MOUNTPROC3_EXPORT:
+                    {
+                        Exports result = MOUNTPROC3_EXPORT();
+                        result.XdrEncode(xdr2);
+                        break;
+                    }
+                default:
+                    throw new Exception($"Unknown procedure {procedure}");
             }
-            else
-            { call.failProgramUnavailable(); }
         }
 
         public abstract void MOUNTPROC3_NULL();
-
         public abstract MountStatus MOUNTPROC3_MNT(Name arg1);
-
         public abstract MountList MOUNTPROC3_DUMP();
-
         public abstract void MOUNTPROC3_UMNT(Name arg1);
-
         public abstract void MOUNTPROC3_UMNTALL();
-
         public abstract Exports MOUNTPROC3_EXPORT();
-
     }
     // End of NFSv3MountProtocolServerStub.cs
 }

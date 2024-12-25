@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC.Mount
 {
@@ -17,25 +17,25 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
         { }
 
         public MountStatus(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeInt((int)this._fhs_status);
+            xdr.XdrEncodeInt((int)this._fhs_status);
 
             switch (this._fhs_status)
             {
                 case NFSMountStats.MNT_OK:
-                    this._mountinfo.xdrEncode(xdr);
+                    this._mountinfo.XdrEncode(xdr);
                     break;
                 default:
                     break;
             }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._fhs_status = (NFSMountStats)xdr.xdrDecodeInt();
+            this._fhs_status = (NFSMountStats)xdr.XdrDecodeInt();
 
             switch (this._fhs_status)
             {
@@ -69,21 +69,30 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
         { }
 
         public MountAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             this._fhandle.Version = NFSv3MountProtocol.MOUNTVERS;
-            this._fhandle.xdrEncode(xdr);
-            xdr.xdrEncodeIntVector(this._auth_flavors);
+            this._fhandle.XdrEncode(xdr);
+            xdr.XdrEncodeInt(_auth_flavors.Length);
+            foreach (int flavor in _auth_flavors)
+            {
+                xdr.XdrEncodeInt(flavor);
+            }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._fhandle = new NFSHandle();
             this._fhandle.Version = NFSv3MountProtocol.MOUNTVERS;
-            this._fhandle.xdrDecode(xdr);
-            this._auth_flavors = xdr.xdrDecodeIntVector();
+            this._fhandle.XdrDecode(xdr);
+            int length = xdr.XdrDecodeInt();
+            this._auth_flavors = new int[length];
+            for (int i = 0; i < length; i++)
+            {
+                this._auth_flavors[i] = xdr.XdrDecodeInt();
+            }
         }
 
         public NFSHandle MountHandle

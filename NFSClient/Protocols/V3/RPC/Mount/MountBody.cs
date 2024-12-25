@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC.Mount
 {
@@ -18,16 +18,16 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
         { }
 
         public MountBody(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._hostname.xdrEncode(xdr);
-            this._directory.xdrEncode(xdr);
-            this._nextentry.xdrEncode(xdr);
+            this._hostname.XdrEncode(xdr);
+            this._directory.XdrEncode(xdr);
+            this._nextentry.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._hostname = new Name(xdr);
             this._directory = new Name(xdr);
