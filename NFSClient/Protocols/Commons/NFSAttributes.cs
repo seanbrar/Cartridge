@@ -6,8 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using NFSLibrary.Protocols.Commons.RPC;
-using NFSLibrary.Protocols.Commons.XDR;
+using org.acplt.oncrpc;
+using org.acplt.oncrpc.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {

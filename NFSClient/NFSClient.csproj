@@ -8,6 +8,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Platforms>x64</Platforms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <ApplicationIcon>Resources\NFS_Linux.ico</ApplicationIcon>
     <Company>Cartridge Project</Company>
     <Product>Cartridge</Product>
