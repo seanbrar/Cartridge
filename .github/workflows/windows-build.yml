@@ -1,0 +1,40 @@
+name: Windows Build
+
+on:
+  push:
+    branches: [ dev, master ]
+  pull_request:
+    branches: [ dev, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+      
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      
+    - name: Create Release Package
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: |
+        dotnet publish NFSClient/NFSClient.csproj -c Release -r win-x64 --self-contained true
+      
+    - name: Upload Build Artifact
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Cartridge-Windows
+        path: NFSClient/bin/Release/net6.0-windows/win-x64/publish/
