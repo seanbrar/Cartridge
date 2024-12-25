@@ -4,8 +4,10 @@
  * See http://remotetea.sourceforge.net for details
  */
 using System;
-using org.acplt.oncrpc;
-using NFSLibrary.Protocols.V4.RPC;
+using System.Collections.Generic;
+using System.Text;
+using NFSLibrary.Protocols.Commons.RPC;
+using NFSLibrary.Protocols.Commons.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {
