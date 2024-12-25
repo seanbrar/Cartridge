@@ -1,4 +1,4 @@
-namespace NFSLibrary.RPC.XDR
+namespace NFSClient.RPC.XDR
 {
     public interface IXdrData
     {

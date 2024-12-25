@@ -26,12 +26,12 @@ namespace NFSClient.RPC.XDR
             return this.value;
         }
 
-        void IXdrData.XdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeInt(value);
         }
 
-        void IXdrData.XdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             value = (short)xdr.xdrDecodeInt();
         }

@@ -1,8 +1,9 @@
+using System;
 using System.Net;
 
 namespace NFSClient.RPC.XDR
 {
-    public abstract class XdrDecodingStream
+    public abstract class XdrDecodingStream : IDisposable
     {
         public abstract bool xdrDecodeBoolean();
         public abstract byte xdrDecodeByte();
@@ -30,5 +31,7 @@ namespace NFSClient.RPC.XDR
                 throw new ArgumentException($"Variable opaque data must not exceed {maxLength} bytes");
             return value;
         }
+
+        public abstract void Dispose();
     }
 } 
