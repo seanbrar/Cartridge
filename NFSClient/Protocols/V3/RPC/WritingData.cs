@@ -16,15 +16,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public WritingData(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._before.xdrEncode(xdr);
-            this._after.xdrEncode(xdr);
+            this._before.XdrEncode(xdr);
+            this._after.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._before = new PreOperationAttributes(xdr);
             this._after = new PostOperationAttributes(xdr);

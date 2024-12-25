@@ -36,6 +36,4 @@ namespace NFSLibrary.Protocols.V3.RPC
             { this._handle = value; }
         }
     }
-
-    // End of READLINK3args.cs
 }

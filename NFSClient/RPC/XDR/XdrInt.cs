@@ -1,6 +1,4 @@
-using NFSLibrary.RPC.XDR;
-
-namespace NFSLibrary.RPC
+namespace NFSLibrary.RPC.XDR
 {
     /// <summary>
     /// Represents a serializable XDR integer value.

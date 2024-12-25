@@ -23,53 +23,52 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._item.XdrEncode(xdr);
-            this._cookie.XdrEncode(xdr);
-
-            xdr.XdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
-            xdr.XdrEncodeInt(this._count);
+            _item.XdrEncode(xdr);
+            _cookie.XdrEncode(xdr);
+            xdr.XdrEncodeOpaque(_cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
+            xdr.XdrEncodeInt(_count);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._item = new NFSHandle();
-            this._item.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._item.XdrDecode(xdr);
-            this._cookie = new NFSCookie(xdr);
-            this._cookieverf = xdr.XdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
-            this._count = xdr.XdrDecodeInt();
+            _item = new NFSHandle();
+            _item.Version = V3.RPC.NFSv3Protocol.NFS_V3;
+            _item.XdrDecode(xdr);
+            _cookie = new NFSCookie(xdr);
+            _cookieverf = xdr.XdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
+            _count = xdr.XdrDecodeInt();
         }
 
         public NFSHandle HandleObject
         {
             get
-            { return this._item; }
+            { return _item; }
             set
-            { this._item = value; }
+            { _item = value; }
         }
 
         public NFSCookie Cookie
         {
             get
-            { return this._cookie; }
+            { return _cookie; }
             set
-            { this._cookie = value; }
+            { _cookie = value; }
         }
 
         public byte[] CookieData
         {
             get
-            { return this._cookieverf; }
+            { return _cookieverf; }
             set
-            { this._cookieverf = value; }
+            { _cookieverf = value; }
         }
 
         public int Count
         {
             get
-            { return this._count; }
+            { return _count; }
             set
-            { this._count = value; }
+            { _count = value; }
         }
     }
     // End of READDIR3args.cs

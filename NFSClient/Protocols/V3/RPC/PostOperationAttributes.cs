@@ -16,17 +16,17 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public PostOperationAttributes(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeBoolean(this._attributes_follow);
 
             if (this._attributes_follow)
-            { this._attributes.xdrEncode(xdr); }
+            { this._attributes.XdrEncode(xdr); }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._attributes_follow = xdr.xdrDecodeBoolean();
 

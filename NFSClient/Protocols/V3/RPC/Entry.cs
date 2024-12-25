@@ -8,6 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
+    // Class already implements IXdrData interface with correct method casing
     public class Entry : IXdrData
     {
         private long _fileid;
@@ -21,6 +22,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         public Entry(XdrDecodingStream xdr)
         { XdrDecode(xdr); }
 
+        // XdrEncode and XdrDecode methods already have correct casing
         public void XdrEncode(XdrEncodingStream xdr)
         {
             Entry _this = this;

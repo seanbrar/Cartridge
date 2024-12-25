@@ -25,7 +25,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         {
             this._handle = new NFSHandle();
             this._handle.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._handle.XdrDecode(xdr); ;
+            this._handle.XdrDecode(xdr);
         }
 
         public NFSHandle Handle

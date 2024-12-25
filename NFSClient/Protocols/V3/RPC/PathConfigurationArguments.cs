@@ -30,10 +30,8 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public NFSHandle Handle
         {
-            get
-            { return this._obj; }
-            set
-            { this._obj = value; }
+            get { return this._obj; }
+            set { this._obj = value; }
         }
     }
     // End of PATHCONF3args.cs

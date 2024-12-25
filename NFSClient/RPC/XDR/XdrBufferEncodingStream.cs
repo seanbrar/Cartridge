@@ -21,12 +21,12 @@ namespace NFSLibrary.RPC.XDR
         public byte[] GetBuffer() => _buffer;
         public int GetBufferLength() => _position;
 
-        public override void xdrEncodeBoolean(bool value)
+        public override void XdrEncodeBoolean(bool value)
         {
-            xdrEncodeInt(value ? 1 : 0);
+            XdrEncodeInt(value ? 1 : 0);
         }
 
-        public override void xdrEncodeByte(byte value)
+        public override void XdrEncodeByte(byte value)
         {
             EnsureSpace(4);
             _buffer[_position++] = 0;
@@ -35,12 +35,12 @@ namespace NFSLibrary.RPC.XDR
             _buffer[_position++] = value;
         }
 
-        public override void xdrEncodeShort(short value)
+        public override void XdrEncodeShort(short value)
         {
-            xdrEncodeInt(value);
+            XdrEncodeInt(value);
         }
 
-        public override void xdrEncodeInt(int value)
+        public override void XdrEncodeInt(int value)
         {
             EnsureSpace(4);
             _buffer[_position++] = (byte)((value >> 24) & 0xFF);
@@ -49,7 +49,7 @@ namespace NFSLibrary.RPC.XDR
             _buffer[_position++] = (byte)(value & 0xFF);
         }
 
-        public override void xdrEncodeLong(long value)
+        public override void XdrEncodeLong(long value)
         {
             EnsureSpace(8);
             _buffer[_position++] = (byte)((value >> 56) & 0xFF);
@@ -62,34 +62,34 @@ namespace NFSLibrary.RPC.XDR
             _buffer[_position++] = (byte)(value & 0xFF);
         }
 
-        public override void xdrEncodeFloat(float value)
+        public override void XdrEncodeFloat(float value)
         {
-            xdrEncodeInt(BitConverter.ToInt32(BitConverter.GetBytes(value), 0));
+            XdrEncodeInt(BitConverter.ToInt32(BitConverter.GetBytes(value), 0));
         }
 
-        public override void xdrEncodeDouble(double value)
+        public override void XdrEncodeDouble(double value)
         {
-            xdrEncodeLong(BitConverter.ToInt64(BitConverter.GetBytes(value), 0));
+            XdrEncodeLong(BitConverter.ToInt64(BitConverter.GetBytes(value), 0));
         }
 
-        public override void xdrEncodeString(string value)
+        public override void XdrEncodeString(string value)
         {
             if (value == null)
             {
-                xdrEncodeInt(0);
+                XdrEncodeInt(0);
                 return;
             }
 
             byte[] bytes = Encoding.UTF8.GetBytes(value);
-            xdrEncodeInt(bytes.Length);
-            xdrEncodeOpaque(bytes);
+            XdrEncodeInt(bytes.Length);
+            XdrEncodeOpaque(bytes);
         }
 
-        public override void xdrEncodeOpaque(byte[] value)
+        public override void XdrEncodeOpaque(byte[] value)
         {
             if (value == null)
             {
-                xdrEncodeInt(0);
+                XdrEncodeInt(0);
                 return;
             }
 
@@ -107,7 +107,7 @@ namespace NFSLibrary.RPC.XDR
             }
         }
 
-        public override void xdrEncodeIPAddress(IPAddress value)
+        public override void XdrEncodeIPAddress(IPAddress value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
@@ -116,7 +116,7 @@ namespace NFSLibrary.RPC.XDR
             if (addressBytes.Length != 4)
                 throw new ArgumentException("Only IPv4 addresses are supported", nameof(value));
 
-            xdrEncodeOpaque(addressBytes);
+            XdrEncodeOpaque(addressBytes);
         }
 
         private void EnsureSpace(int needed)

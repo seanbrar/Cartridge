@@ -198,5 +198,4 @@ namespace NFSLibrary.Protocols.V3.RPC
             { this._setmtime = value; }
         }
     }
-    // End of sattr3.cs
 }

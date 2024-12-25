@@ -1,6 +1,6 @@
 using NFSLibrary.RPC.XDR;
 
-namespace NFSLibrary.RPC
+namespace NFSLibrary.RPC.XDR
 {
     /// <summary>
     /// Represents a serializable XDR float value.
@@ -26,12 +26,12 @@ namespace NFSLibrary.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeFloat(value);
+            xdr.XdrEncodeFloat(value);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            value = xdr.xdrDecodeFloat();
+            value = xdr.XdrDecodeFloat();
         }
     }
 }
