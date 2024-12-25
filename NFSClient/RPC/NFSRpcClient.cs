@@ -10,7 +10,7 @@ namespace NFSLibrary.RPC
     /// Modern RPC client implementation for NFS operations.
     /// This replaces the legacy Java-ported implementation with a clean, C#-native approach.
     /// </summary>
-    public class NFSRpcClient : INFSRpcClient
+    public partial class NFSRpcClient : INFSRpcClient
     {
         private readonly JsonRpc _rpc;
         private readonly NamedPipeClientStream _pipe;

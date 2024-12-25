@@ -9,14 +9,14 @@ namespace NFSLibrary
     /// Bridge class to adapt the modern NFSv3Client to work with legacy Dokan code.
     /// This is a temporary solution to maintain compatibility during modernization.
     /// </summary>
-    public class NFSClient
+    public class NFSClientLegacy
     {
         private readonly NFSv3Compatibility _compat;
-        private readonly ILogger<NFSClient> _logger;
+        private readonly ILogger<NFSClientLegacy> _logger;
         private readonly ConcurrentDictionary<string, byte[]> _handleCache;
         private string _currentPath = string.Empty;
 
-        public NFSClient(NFSv3Compatibility compat, ILogger<NFSClient> logger)
+        public NFSClientLegacy(NFSv3Compatibility compat, ILogger<NFSClientLegacy> logger)
         {
             _compat = compat;
             _logger = logger;
