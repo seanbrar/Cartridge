@@ -1,6 +1,8 @@
 // File: NFSClient/RPC/XDR/XdrShort.cs
 
-namespace NFSLibrary.RPC.XDR
+using NFSClient.RPC.XDR;
+
+namespace NFSClient.RPC.XDR
 {
     /// <summary>
     /// Represents a serializable XDR short value.
