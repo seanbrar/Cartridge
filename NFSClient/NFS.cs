@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using NFSLibrary.Protocols;
 using NFSLibrary.Protocols.Commons;
-using NFSLibrary.Protocols.V2;
 using NFSLibrary.Protocols.V3;
-using NFSLibrary.Protocols.V4; 
 using System.Runtime.InteropServices;
 using System.Net;
 
@@ -23,17 +21,9 @@ namespace NFSLibrary
         public enum NFSVersion
         {
             /// <summary>
-            /// NFS Version 2
-            /// </summary>
-            v2 = 2,
-            /// <summary>
             /// NFS Version 3
             /// </summary>
-            v3 = 3,
-            /// <summary>
-            /// NFS Version 4.1
-            /// </summary>
-            v4 = 4
+            v3 = 3
         }
 
         #endregion
@@ -46,12 +36,10 @@ namespace NFSLibrary
         private string _CurrentDirectory = string.Empty;
 
         private INFS _nfsInterface = null;
-        /* Block size must not be greater than 8064 for V2 and
-         * 8000 for V3. RPC Buffer size is fixed to 8192, when
+        /* RPC Buffer size is fixed to 8192, when
          * requesting on RPC, 8192 bytes contain every details
-         * of request. we reserve 128 bytes for header information
-         * of V2 and 192 bytes for header information of V3.
-         * V2: 8064 bytes for data. 
+         * of request. we reserve 192 bytes for header information
+         * of V3.
          * V3: 8000 bytes for data. */
         public int _blockSize = 7900;
         //this can change
@@ -138,23 +126,11 @@ namespace NFSLibrary
         /// <param name="Version">The required NFS version</param>
         public NFSClient(NFSVersion Version)
         {
-            switch (Version)
+            if (Version != NFSVersion.v3)
             {
-                case NFSVersion.v2:
-                    this._nfsInterface = new NFSv2();
-                    break;
-
-                case NFSVersion.v3:
-                    this._nfsInterface = new NFSv3();
-                    break;
-
-                case NFSVersion.v4:
-                    this._nfsInterface = new NFSv4();
-                    break; 
-
-                default:
-                    throw new NotImplementedException();
+                throw new NotImplementedException("Only NFSv3 is supported");
             }
+            this._nfsInterface = new NFSv3();
         }
 
         #endregion

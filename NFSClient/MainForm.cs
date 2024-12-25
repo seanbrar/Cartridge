@@ -51,7 +51,7 @@ namespace NFSClient
         public int serverUid = 0;
         public int serverGid = 0;
         public bool serverSecurePort = false;
-        public string serverVersion = "v2";
+        public string serverVersion = "v3";
         private string MountPoint;
         DokanOperations dokanOperation = null;
         public bool mountedDrive = false;
@@ -155,24 +155,10 @@ namespace NFSClient
             {
                 addToStatusLog("Pinged server...OK");
                 //TODO
-                NFSLibrary.NFSClient.NFSVersion ver;
-                if (serverVersion == "v3")
-                {
-                    ver = NFSLibrary.NFSClient.NFSVersion.v3;
-                    addToStatusLog("Using NFS version 3");
-                }
-                else if (serverVersion == "v2")
-                {
-                    ver = NFSLibrary.NFSClient.NFSVersion.v2;
-                    addToStatusLog("Using NFS version 2");
-                }
-                else
-                {
-                    ver = NFSLibrary.NFSClient.NFSVersion.v4;
-                    addToStatusLog("Using NFS version 4.1 !!! (experimantal)");
-                }
+                NFSLibrary.NFSClient.NFSVersion ver = NFSLibrary.NFSClient.NFSVersion.v3;
+                addToStatusLog("Using NFS version 3");
 
-                 addToStatusLog("Using uid: " + serverUid);
+                addToStatusLog("Using uid: " + serverUid);
 
 
                 nfsClient = new NFSLibrary.NFSClient(ver);

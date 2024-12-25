@@ -31,19 +31,13 @@ namespace NFSClient
             if (indexToChange == -1)
                 nfsProto.SelectedIndex = 0;
             else
-                //load the settings
             {
                 newProfileName.Text = NFSClient.Properties.Settings.Default.ServerName[indexToChange];
                 defServerAdr.Text = NFSClient.Properties.Settings.Default.ServerAddres[indexToChange];
                 GidConnect.Text = NFSClient.Properties.Settings.Default.gid[indexToChange].ToString();
-                 uidConnect.Text = NFSClient.Properties.Settings.Default.uid[indexToChange].ToString();
-                 securePort.Checked = NFSClient.Properties.Settings.Default.SecurePort[indexToChange];
-                if (NFSClient.Properties.Settings.Default.DefaultProtocol[indexToChange] == "v3")
-                    nfsProto.SelectedIndex = 1;
-                else if (NFSClient.Properties.Settings.Default.DefaultProtocol[indexToChange] == "v2")
-                    nfsProto.SelectedIndex = 0;
-                else
-                    nfsProto.SelectedIndex = 2;
+                uidConnect.Text = NFSClient.Properties.Settings.Default.uid[indexToChange].ToString();
+                securePort.Checked = NFSClient.Properties.Settings.Default.SecurePort[indexToChange];
+                nfsProto.SelectedIndex = 0; // Always v3
             }
         }
 

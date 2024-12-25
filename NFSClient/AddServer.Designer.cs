@@ -111,9 +111,7 @@
             this.nfsProto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nfsProto.FormattingEnabled = true;
             this.nfsProto.Items.AddRange(new object[] {
-            "v2",
-            "v3",
-            "v4.1"});
+            "v3"});
             this.nfsProto.Location = new System.Drawing.Point(130, 86);
             this.nfsProto.Name = "nfsProto";
             this.nfsProto.Size = new System.Drawing.Size(58, 21);
