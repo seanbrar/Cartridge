@@ -18,24 +18,24 @@ namespace NFSLibrary.RPC.XDR
             _position = 0;
         }
 
-        public override bool XdrDecodeBoolean()
+        public override bool xdrDecodeBoolean()
         {
-            return XdrDecodeInt() != 0;
+            return xdrDecodeInt() != 0;
         }
 
-        public override byte XdrDecodeByte()
+        public override byte xdrDecodeByte()
         {
             EnsureSpace(4);
             _position += 3; // Skip padding
             return _buffer[_position++];
         }
 
-        public override short XdrDecodeShort()
+        public override short xdrDecodeShort()
         {
-            return (short)XdrDecodeInt();
+            return (short)xdrDecodeInt();
         }
 
-        public override int XdrDecodeInt()
+        public override int xdrDecodeInt()
         {
             EnsureSpace(4);
             int value = (_buffer[_position++] << 24) |
@@ -45,7 +45,7 @@ namespace NFSLibrary.RPC.XDR
             return value;
         }
 
-        public override long XdrDecodeLong()
+        public override long xdrDecodeLong()
         {
             EnsureSpace(8);
             long value = ((long)_buffer[_position++] << 56) |
@@ -59,31 +59,31 @@ namespace NFSLibrary.RPC.XDR
             return value;
         }
 
-        public override float XdrDecodeFloat()
+        public override float xdrDecodeFloat()
         {
-            int bits = XdrDecodeInt();
+            int bits = xdrDecodeInt();
             return BitConverter.ToSingle(BitConverter.GetBytes(bits), 0);
         }
 
-        public override double XdrDecodeDouble()
+        public override double xdrDecodeDouble()
         {
-            long bits = XdrDecodeLong();
+            long bits = xdrDecodeLong();
             return BitConverter.ToDouble(BitConverter.GetBytes(bits), 0);
         }
 
-        public override string XdrDecodeString()
+        public override string xdrDecodeString()
         {
-            int length = XdrDecodeInt();
+            int length = xdrDecodeInt();
             if (length == 0)
                 return string.Empty;
 
-            byte[] bytes = XdrDecodeOpaque();
+            byte[] bytes = xdrDecodeOpaque();
             return Encoding.UTF8.GetString(bytes, 0, length);
         }
 
-        public override byte[] XdrDecodeOpaque()
+        public override byte[] xdrDecodeOpaque()
         {
-            int length = XdrDecodeInt();
+            int length = xdrDecodeInt();
             if (length == 0)
                 return Array.Empty<byte>();
 
@@ -99,9 +99,9 @@ namespace NFSLibrary.RPC.XDR
             return result;
         }
 
-        public override IPAddress XdrDecodeIPAddress()
+        public override IPAddress xdrDecodeIPAddress()
         {
-            byte[] addressBytes = XdrDecodeOpaque();
+            byte[] addressBytes = xdrDecodeOpaque();
             if (addressBytes.Length != 4)
                 throw new InvalidOperationException("Invalid IP address length");
 

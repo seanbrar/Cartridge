@@ -1,11 +1,11 @@
 using NFSLibrary.RPC.XDR;
 
-namespace NFSLibrary.RPC
+namespace NFSLibrary.RPC.XDR
 {
     /// <summary>
     /// Represents a serializable XDR short value.
     /// </summary>
-    public class XdrShort : XdrAble
+    public class XdrShort : IXdrData
     {
         private short value;
 
@@ -26,12 +26,12 @@ namespace NFSLibrary.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.XdrEncodeInt(value);
+            xdr.xdrEncodeInt(value);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            value = (short)xdr.XdrDecodeInt();
+            value = (short)xdr.xdrDecodeInt();
         }
     }
 } 
