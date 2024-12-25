@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -17,15 +17,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public MakeFileArguments(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._where.xdrEncode(xdr);
-            this._how.xdrEncode(xdr);
+            this._where.XdrEncode(xdr);
+            this._how.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._where = new ItemOperationArguments(xdr);
             this._how = new MakeFileHow(xdr);
@@ -65,9 +65,9 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public MakeFileHow(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeInt((int)this._mode);
 
@@ -75,7 +75,7 @@ namespace NFSLibrary.Protocols.V3.RPC
             {
                 case MakeFileModes.UNCHECKED:
                 case MakeFileModes.GUARDED:
-                    this._obj_attributes.xdrEncode(xdr);
+                    this._obj_attributes.XdrEncode(xdr);
                     break;
                 case MakeFileModes.EXCLUSIVE:
                     xdr.xdrEncodeOpaque(this._verf, NFSv3Protocol.NFS3_CREATEVERFSIZE);
@@ -83,7 +83,7 @@ namespace NFSLibrary.Protocols.V3.RPC
             }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._mode = (MakeFileModes)xdr.xdrDecodeInt();
 

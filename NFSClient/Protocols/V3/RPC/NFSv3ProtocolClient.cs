@@ -3,7 +3,7 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 using System.Net;
 
 /**
@@ -20,7 +20,7 @@ namespace NFSLibrary.Protocols.V3.RPC
          * Constructs a <code>NFSv3ProtocolClient</code> client stub proxy object
          * from which the NFS_PROGRAM remote program can be accessed.
          * @param host Internet address of host where to contact the remote program.
-         * @param protocol {@link org.acplt.oncrpc.OncRpcProtocols Protocol} to be
+         * @param protocol {@link NFSLibrary.RPC.XDR.OncRpcProtocols Protocol} to be
          *   used for ONC/RPC calls.
          * @throws OncRpcException if an ONC/RPC error occurs.
          * @throws IOException if an I/O error occurs.
@@ -40,7 +40,7 @@ namespace NFSLibrary.Protocols.V3.RPC
          * from which the NFS_PROGRAM remote program can be accessed.
          * @param host Internet address of host where to contact the remote program.
          * @param port Port number at host where the remote program can be reached.
-         * @param protocol {@link org.acplt.oncrpc.OncRpcProtocols Protocol} to be
+         * @param protocol {@link NFSLibrary.RPC.XDR.OncRpcProtocols Protocol} to be
          *   used for ONC/RPC calls.
          * @throws OncRpcException if an ONC/RPC error occurs.
          * @throws IOException if an I/O error occurs.
@@ -69,7 +69,7 @@ namespace NFSLibrary.Protocols.V3.RPC
          * @param host Internet address of host where to contact the remote program.
          * @param program Remote program number.
          * @param version Remote program version number.
-         * @param protocol {@link org.acplt.oncrpc.OncRpcProtocols Protocol} to be
+         * @param protocol {@link NFSLibrary.RPC.XDR.OncRpcProtocols Protocol} to be
          *   used for ONC/RPC calls.
          * @throws OncRpcException if an ONC/RPC error occurs.
          * @throws IOException if an I/O error occurs.
@@ -86,7 +86,7 @@ namespace NFSLibrary.Protocols.V3.RPC
          * @param program Remote program number.
          * @param version Remote program version number.
          * @param port Port number at host where the remote program can be reached.
-         * @param protocol {@link org.acplt.oncrpc.OncRpcProtocols Protocol} to be
+         * @param protocol {@link NFSLibrary.RPC.XDR.OncRpcProtocols Protocol} to be
          *   used for ONC/RPC calls.
          * @throws OncRpcException if an ONC/RPC error occurs.
          * @throws IOException if an I/O error occurs.
@@ -103,7 +103,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         * @param program Remote program number.
         * @param version Remote program version number.
         * @param port Port number at host where the remote program can be reached.
-        * @param protocol {@link org.acplt.oncrpc.OncRpcProtocols Protocol} to be
+        * @param protocol {@link NFSLibrary.RPC.XDR.OncRpcProtocols Protocol} to be
         *   used for ONC/RPC calls.
         * @throws OncRpcException if an ONC/RPC error occurs.
         * @throws IOException if an I/O error occurs.

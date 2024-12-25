@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -17,15 +17,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public CommitAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._file_wcc.xdrEncode(xdr);
+            this._file_wcc.XdrEncode(xdr);
             xdr.xdrEncodeOpaque(this._verf, NFSv3Protocol.NFS3_WRITEVERFSIZE);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._file_wcc = new WritingData(xdr);
             this._verf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_WRITEVERFSIZE);
@@ -52,12 +52,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public CommitAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._file_wcc.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._file_wcc.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this._file_wcc = new WritingData(xdr); }
 
         public WritingData Data

@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -19,22 +19,22 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public ReadAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._attributes.xdrEncode(xdr);
-            xdr.xdrEncodeInt(this._count);
-            xdr.xdrEncodeBoolean(this._eof);
-            xdr.xdrEncodeDynamicOpaque(this._data);
+            this._attributes.XdrEncode(xdr);
+            xdr.XdrEncodeInt(this._count);
+            xdr.XdrEncodeBoolean(this._eof);
+            xdr.XdrEncodeDynamicOpaque(this._data);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._attributes = new PostOperationAttributes(xdr);
-            this._count = xdr.xdrDecodeInt();
-            this._eof = xdr.xdrDecodeBoolean();
-            this._data = xdr.xdrDecodeDynamicOpaque();
+            this._count = xdr.XdrDecodeInt();
+            this._eof = xdr.XdrDecodeBoolean();
+            this._data = xdr.XdrDecodeDynamicOpaque();
         }
 
         public PostOperationAttributes Attributes
@@ -70,12 +70,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public ReadAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._attributes.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._attributes.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this._attributes = new PostOperationAttributes(xdr); }
 
         public PostOperationAttributes Attributes

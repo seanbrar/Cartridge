@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -17,15 +17,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public SymlinkArguments(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._where.xdrEncode(xdr);
-            this._symlink.xdrEncode(xdr);
+            this._where.XdrEncode(xdr);
+            this._symlink.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._where = new ItemOperationArguments(xdr);
             this._symlink = new SymlinkData(xdr);
@@ -53,15 +53,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public SymlinkData(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._symlink_attributes.xdrEncode(xdr);
-            this._symlink_data.xdrEncode(xdr);
+            this._symlink_attributes.XdrEncode(xdr);
+            this._symlink_data.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._symlink_attributes = new MakeAttributes(xdr);
             this._symlink_data = new Name(xdr);

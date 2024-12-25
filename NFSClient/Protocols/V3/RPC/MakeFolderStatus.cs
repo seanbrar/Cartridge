@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -19,26 +19,26 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public MakeFolderAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeBoolean(this._handleexists);
             if (this._handleexists)
-            { this._handle.xdrEncode(xdr); }
+            { this._handle.XdrEncode(xdr); }
 
-            this._attributes.xdrEncode(xdr);
-            this._dir_wcc.xdrEncode(xdr);
+            this._attributes.XdrEncode(xdr);
+            this._dir_wcc.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._handleexists = xdr.xdrDecodeBoolean();
             if (this._handleexists)
             {
                 this._handle = new NFSHandle();
                 this._handle.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-                this._handle.xdrDecode(xdr);
+                this._handle.XdrDecode(xdr);
             }
 
             this._attributes = new PostOperationAttributes(xdr);
@@ -78,12 +78,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public MakeFolderAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._dir_wcc.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._dir_wcc.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this._dir_wcc = new WritingData(xdr); }
 
         public WritingData Data

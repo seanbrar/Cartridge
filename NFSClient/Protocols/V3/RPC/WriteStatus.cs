@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -26,22 +26,22 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public WriteAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._file_wcc.xdrEncode(xdr);
-            xdr.xdrEncodeInt(this._count);
-            xdr.xdrEncodeInt((int)this._committed);
-            xdr.xdrEncodeOpaque(this._verf, NFSv3Protocol.NFS3_WRITEVERFSIZE);
+            this._file_wcc.XdrEncode(xdr);
+            xdr.XdrEncodeInt(this._count);
+            xdr.XdrEncodeInt((int)this._committed);
+            xdr.XdrEncodeOpaque(this._verf, NFSv3Protocol.NFS3_WRITEVERFSIZE);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._file_wcc = new WritingData(xdr);
-            this._count = xdr.xdrDecodeInt();
-            this._committed = (StableHow)xdr.xdrDecodeInt();
-            this._verf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_WRITEVERFSIZE);
+            this._count = xdr.XdrDecodeInt();
+            this._committed = (StableHow)xdr.XdrDecodeInt();
+            this._verf = xdr.XdrDecodeOpaque(NFSv3Protocol.NFS3_WRITEVERFSIZE);
         }
 
         public WritingData Data
@@ -77,12 +77,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public WriteAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._dir_wcc.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._dir_wcc.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this._dir_wcc = new WritingData(xdr); }
 
         public WritingData Data

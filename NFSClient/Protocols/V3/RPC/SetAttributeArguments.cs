@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -19,22 +19,22 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public SetAttributeArguments(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._obj.xdrEncode(xdr);
-            this._new_attributes.xdrEncode(xdr);
+            this._obj.XdrEncode(xdr);
+            this._new_attributes.XdrEncode(xdr);
             xdr.xdrEncodeBoolean(this._guardcheck);
             if (this._guardcheck)
-            { this._guardctime.xdrEncode(xdr); }
+            { this._guardctime.XdrEncode(xdr); }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._obj = new NFSHandle();
             this._obj.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._obj.xdrDecode(xdr);
+            this._obj.XdrDecode(xdr);
             this._new_attributes = new MakeAttributes(xdr);
             this._guardcheck = xdr.xdrDecodeBoolean();
             if (this._guardcheck)

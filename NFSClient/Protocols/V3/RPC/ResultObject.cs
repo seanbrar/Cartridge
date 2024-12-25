@@ -5,7 +5,7 @@
  */
 using System;
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -19,26 +19,26 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public ResultObject(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeInt((int)this._status);
+            xdr.XdrEncodeInt((int)this._status);
 
             switch (this._status)
             {
                 case NFSStats.NFS_OK:
-                   ((XdrAble)this._resok).xdrEncode(xdr);
+                   ((XdrAble)this._resok).XdrEncode(xdr);
                     break;
                 default:
-                    ((XdrAble)this._resfail).xdrEncode(xdr);
+                    ((XdrAble)this._resfail).XdrEncode(xdr);
                     break;
             }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._status = (NFSStats)xdr.xdrDecodeInt();
+            this._status = (NFSStats)xdr.XdrDecodeInt();
             
             switch (this._status)
             {

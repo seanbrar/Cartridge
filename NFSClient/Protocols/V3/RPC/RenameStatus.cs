@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -17,15 +17,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public RenameAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._fromdir_wcc.xdrEncode(xdr);
-            this._todir_wcc.xdrEncode(xdr);
+            this._fromdir_wcc.XdrEncode(xdr);
+            this._todir_wcc.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._fromdir_wcc = new WritingData(xdr);
             this._todir_wcc = new WritingData(xdr);
@@ -53,15 +53,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public RenameAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._fromdir_wcc.xdrEncode(xdr);
-            this._todir_wcc.xdrEncode(xdr);
+            this._fromdir_wcc.XdrEncode(xdr);
+            this._todir_wcc.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._fromdir_wcc = new WritingData(xdr);
             this._todir_wcc = new WritingData(xdr);

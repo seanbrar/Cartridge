@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -26,36 +26,36 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public FSInfoAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._obj_attributes.xdrEncode(xdr);
-            xdr.xdrEncodeInt(this._rtmax);
-            xdr.xdrEncodeInt(this._rtpref);
-            xdr.xdrEncodeInt(this._rtmult);
-            xdr.xdrEncodeInt(this._wtmax);
-            xdr.xdrEncodeInt(this._wtpref);
-            xdr.xdrEncodeInt(this._wtmult);
-            xdr.xdrEncodeInt(this._dtpref);
-            xdr.xdrEncodeLong(this._maxfilesize);
-            this._time_delta.xdrEncode(xdr);
-            xdr.xdrEncodeInt(this._properties);
+            this._obj_attributes.XdrEncode(xdr);
+            xdr.XdrEncodeInt(this._rtmax);
+            xdr.XdrEncodeInt(this._rtpref);
+            xdr.XdrEncodeInt(this._rtmult);
+            xdr.XdrEncodeInt(this._wtmax);
+            xdr.XdrEncodeInt(this._wtpref);
+            xdr.XdrEncodeInt(this._wtmult);
+            xdr.XdrEncodeInt(this._dtpref);
+            xdr.XdrEncodeLong(this._maxfilesize);
+            this._time_delta.XdrEncode(xdr);
+            xdr.XdrEncodeInt(this._properties);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._obj_attributes = new PostOperationAttributes(xdr);
-            this._rtmax = xdr.xdrDecodeInt();
-            this._rtpref = xdr.xdrDecodeInt();
-            this._rtmult = xdr.xdrDecodeInt();
-            this._wtmax = xdr.xdrDecodeInt();
-            this._wtpref = xdr.xdrDecodeInt();
-            this._wtmult = xdr.xdrDecodeInt();
-            this._dtpref = xdr.xdrDecodeInt();
-            this._maxfilesize = xdr.xdrDecodeLong();
+            this._rtmax = xdr.XdrDecodeInt();
+            this._rtpref = xdr.XdrDecodeInt();
+            this._rtmult = xdr.XdrDecodeInt();
+            this._wtmax = xdr.XdrDecodeInt();
+            this._wtpref = xdr.XdrDecodeInt();
+            this._wtmult = xdr.XdrDecodeInt();
+            this._dtpref = xdr.XdrDecodeInt();
+            this._maxfilesize = xdr.XdrDecodeLong();
             this._time_delta = new NFSTimeValue(xdr);
-            this._properties = xdr.xdrDecodeInt();
+            this._properties = xdr.XdrDecodeInt();
         }
 
         public int MaximumReadRequestSize

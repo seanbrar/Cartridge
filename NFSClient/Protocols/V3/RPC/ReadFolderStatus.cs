@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -18,16 +18,16 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public ReadFolderAccessResultOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._dir_attributes.xdrEncode(xdr);
+            this._dir_attributes.XdrEncode(xdr);
             xdr.xdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
-            this._reply.xdrEncode(xdr);
+            this._reply.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._dir_attributes = new PostOperationAttributes(xdr);
             this._cookieverf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
@@ -62,21 +62,21 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public ItemAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             if (this._entries != null)
             {
                 xdr.xdrEncodeBoolean(true);
-                this._entries.xdrEncode(xdr);
+                this._entries.XdrEncode(xdr);
             }
             else { xdr.xdrEncodeBoolean(false); };
 
             xdr.xdrEncodeBoolean(this._eof);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._entries = xdr.xdrDecodeBoolean() ? new Entry(xdr) : null;
             this._eof = xdr.xdrDecodeBoolean();

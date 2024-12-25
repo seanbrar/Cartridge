@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -46,9 +46,9 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
 
         public MakeAttributes(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeBoolean(this._setmode);
             if (this._setmode)
@@ -68,14 +68,14 @@ namespace NFSLibrary.Protocols.V3.RPC
 
             xdr.xdrEncodeBoolean(this._setatime != TimeHow.DONT_CHANGE);
             if (this._setatime != TimeHow.DONT_CHANGE)
-            { this._atime.xdrEncode(xdr); }
+            { this._atime.XdrEncode(xdr); }
 
             xdr.xdrEncodeBoolean(this._setmtime != TimeHow.DONT_CHANGE);
             if (this._setmtime != TimeHow.DONT_CHANGE)
-            { this._mtime.xdrEncode(xdr); }
+            { this._mtime.XdrEncode(xdr); }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._setmode = xdr.xdrDecodeBoolean();
             if (this._setmode)

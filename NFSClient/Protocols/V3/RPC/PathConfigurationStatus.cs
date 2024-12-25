@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -22,11 +22,11 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public PathConfigurationAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._obj_attributes.xdrEncode(xdr);
+            this._obj_attributes.XdrEncode(xdr);
             xdr.xdrEncodeInt(this._linkmax);
             xdr.xdrEncodeInt(this._name_max);
             xdr.xdrEncodeBoolean(this._no_trunc);
@@ -35,7 +35,7 @@ namespace NFSLibrary.Protocols.V3.RPC
             xdr.xdrEncodeBoolean(this._case_preserving);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._obj_attributes = new PostOperationAttributes(xdr);
             this._linkmax = xdr.xdrDecodeInt();
@@ -97,12 +97,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public PathConfigurationAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._obj_attributes.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._obj_attributes.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this._obj_attributes = new PostOperationAttributes(xdr); }
 
         public PostOperationAttributes Attributes

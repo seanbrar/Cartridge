@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -20,26 +20,26 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public WriteArguments(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._file.xdrEncode(xdr);
-            xdr.xdrEncodeLong(this._offset);
-            xdr.xdrEncodeInt(this._count);
-            xdr.xdrEncodeInt((int)this._stable);
-            xdr.xdrEncodeDynamicOpaque(this._data);
+            this._file.XdrEncode(xdr);
+            xdr.XdrEncodeLong(this._offset);
+            xdr.XdrEncodeInt(this._count);
+            xdr.XdrEncodeInt((int)this._stable);
+            xdr.XdrEncodeDynamicOpaque(this._data);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._file = new NFSHandle();
             this._file.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._file.xdrDecode(xdr);
-            this._offset = xdr.xdrDecodeLong();
-            this._count = xdr.xdrDecodeInt();
-            this._stable = (StableHow)xdr.xdrDecodeInt();
-            this._data = xdr.xdrDecodeDynamicOpaque();
+            this._file.XdrDecode(xdr);
+            this._offset = xdr.XdrDecodeLong();
+            this._count = xdr.XdrDecodeInt();
+            this._stable = (StableHow)xdr.XdrDecodeInt();
+            this._data = xdr.XdrDecodeDynamicOpaque();
         }
 
         public NFSHandle File

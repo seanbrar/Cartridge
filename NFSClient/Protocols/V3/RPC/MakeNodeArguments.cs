@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -17,15 +17,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public MakeNodeArguments(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._where.xdrEncode(xdr);
-            this._what.xdrEncode(xdr);
+            this._where.XdrEncode(xdr);
+            this._what.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._where = new ItemOperationArguments(xdr);
             this._what = new MakeNodeData(xdr);
@@ -60,32 +60,32 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public MakeNodeData(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeInt((int)this._type);
 
             switch (this._type)
             {
                 case NFSItemTypes.NFCHR:
-                    this._device_chr.xdrEncode(xdr);
+                    this._device_chr.XdrEncode(xdr);
                     break;
                 case NFSItemTypes.NFBLK:
-                    this._device_blk.xdrEncode(xdr);
+                    this._device_blk.XdrEncode(xdr);
                     break;
                 case NFSItemTypes.NFSOCK:
-                    this._pipe_attributes_sock.xdrEncode(xdr);
+                    this._pipe_attributes_sock.XdrEncode(xdr);
                     break;
                 case NFSItemTypes.NFFIFO:
-                    this._pipe_attributes_fifo.xdrEncode(xdr);
+                    this._pipe_attributes_fifo.XdrEncode(xdr);
                     break;
                 default:
                     break;
             }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._type = (NFSItemTypes)xdr.xdrDecodeInt();
 

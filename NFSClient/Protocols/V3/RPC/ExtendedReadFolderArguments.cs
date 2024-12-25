@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -20,22 +20,22 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public ExtendedReadFolderArguments(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._dir.xdrEncode(xdr);
-            this._cookie.xdrEncode(xdr);
+            this._dir.XdrEncode(xdr);
+            this._cookie.XdrEncode(xdr);
             xdr.xdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
             xdr.xdrEncodeInt(this._dircount);
             xdr.xdrEncodeInt(this._maxcount);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._dir = new NFSHandle();
             this._dir.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._dir.xdrDecode(xdr);
+            this._dir.XdrDecode(xdr);
             this._cookie = new NFSCookie(xdr);
             this._cookieverf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
             this._dircount = xdr.xdrDecodeInt();

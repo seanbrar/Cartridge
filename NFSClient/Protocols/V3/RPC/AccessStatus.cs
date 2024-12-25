@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -17,15 +17,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public AccessAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._obj_attributes.xdrEncode(xdr);
+            this._obj_attributes.XdrEncode(xdr);
             xdr.xdrEncodeInt(this._access);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._obj_attributes = new PostOperationAttributes(xdr);
             this._access = xdr.xdrDecodeInt();
@@ -46,12 +46,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public AccessAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._obj_attributes.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._obj_attributes.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this._obj_attributes = new PostOperationAttributes(xdr); }
 
         public PostOperationAttributes Attributes

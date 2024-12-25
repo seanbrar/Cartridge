@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -28,43 +28,43 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public FileAttributes(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeInt((int)this._type);
-            xdr.xdrEncodeInt(this._mode.Mode);
-            xdr.xdrEncodeInt(this._nlink);
-            xdr.xdrEncodeInt(this._uid);
-            xdr.xdrEncodeInt(this._gid);
-            xdr.xdrEncodeLong(this._size);
-            xdr.xdrEncodeLong(this._used);
-            this._rdev.xdrEncode(xdr);
-            xdr.xdrEncodeLong(this._fsid);
-            xdr.xdrEncodeLong(this._fileid);
-            this._atime.xdrEncode(xdr);
-            this._mtime.xdrEncode(xdr);
-            this._ctime.xdrEncode(xdr);
+            xdr.XdrEncodeInt((int)this._type);
+            xdr.XdrEncodeInt(this._mode.Mode);
+            xdr.XdrEncodeInt(this._nlink);
+            xdr.XdrEncodeInt(this._uid);
+            xdr.XdrEncodeInt(this._gid);
+            xdr.XdrEncodeLong(this._size);
+            xdr.XdrEncodeLong(this._used);
+            this._rdev.XdrEncode(xdr);
+            xdr.XdrEncodeLong(this._fsid);
+            xdr.XdrEncodeLong(this._fileid);
+            this._atime.XdrEncode(xdr);
+            this._mtime.XdrEncode(xdr);
+            this._ctime.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._type = (NFSItemTypes)xdr.xdrDecodeInt();
+            this._type = (NFSItemTypes)xdr.XdrDecodeInt();
 
             this._mode = new NFSPermission();
-            this._mode.Mode = xdr.xdrDecodeInt();
+            this._mode.Mode = xdr.XdrDecodeInt();
 
-            this._nlink = xdr.xdrDecodeInt();
-            this._uid = xdr.xdrDecodeInt();
-            this._gid = xdr.xdrDecodeInt();
-            this._size = xdr.xdrDecodeLong();
-            this._used = xdr.xdrDecodeLong();
+            this._nlink = xdr.XdrDecodeInt();
+            this._uid = xdr.XdrDecodeInt();
+            this._gid = xdr.XdrDecodeInt();
+            this._size = xdr.XdrDecodeLong();
+            this._used = xdr.XdrDecodeLong();
             
             this._rdev = new SpecInformation();
-            this._rdev.xdrDecode(xdr);
+            this._rdev.XdrDecode(xdr);
             
-            this._fsid = xdr.xdrDecodeLong();
-            this._fileid = xdr.xdrDecodeLong();
+            this._fsid = xdr.XdrDecodeLong();
+            this._fileid = xdr.XdrDecodeLong();
             this._atime = new NFSTimeValue(xdr);
             this._mtime = new NFSTimeValue(xdr);
             this._ctime = new NFSTimeValue(xdr);

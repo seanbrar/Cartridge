@@ -3,7 +3,7 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -16,16 +16,16 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public PreOperationAttributes(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeBoolean(this._attributes_follow);
             if (this._attributes_follow)
-            { this._attributes.xdrEncode(xdr); }
+            { this._attributes.XdrEncode(xdr); }
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._attributes_follow = xdr.xdrDecodeBoolean();
             if (this._attributes_follow)

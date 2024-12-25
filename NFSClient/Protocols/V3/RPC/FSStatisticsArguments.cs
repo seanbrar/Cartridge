@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -16,16 +16,16 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public FSStatisticsArguments(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._fsroot.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._fsroot.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._fsroot = new NFSHandle();
             this._fsroot.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._fsroot.xdrDecode(xdr);
+            this._fsroot.XdrDecode(xdr);
         }
 
         public NFSHandle FSRoot

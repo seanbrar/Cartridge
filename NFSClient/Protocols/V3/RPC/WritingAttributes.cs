@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -18,16 +18,16 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public WritingAttributes(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeLong(this._size);
-            this._mtime.xdrEncode(xdr);
-            this._ctime.xdrEncode(xdr);
+            this._mtime.XdrEncode(xdr);
+            this._ctime.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._size = xdr.xdrDecodeLong();
             this._mtime = new NFSTimeValue(xdr);

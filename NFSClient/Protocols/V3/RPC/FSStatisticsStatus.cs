@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -23,30 +23,30 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public FSStatisticsAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._obj_attributes.xdrEncode(xdr);
-            xdr.xdrEncodeLong(this._tbytes);
-            xdr.xdrEncodeLong(this._fbytes);
-            xdr.xdrEncodeLong(this._abytes);
-            xdr.xdrEncodeLong(this._tfiles);
-            xdr.xdrEncodeLong(this._ffiles);
-            xdr.xdrEncodeLong(this._afiles);
-            xdr.xdrEncodeInt(this._invarsec);
+            this._obj_attributes.XdrEncode(xdr);
+            xdr.XdrEncodeLong(this._tbytes);
+            xdr.XdrEncodeLong(this._fbytes);
+            xdr.XdrEncodeLong(this._abytes);
+            xdr.XdrEncodeLong(this._tfiles);
+            xdr.XdrEncodeLong(this._ffiles);
+            xdr.XdrEncodeLong(this._afiles);
+            xdr.XdrEncodeInt(this._invarsec);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._obj_attributes = new PostOperationAttributes(xdr);
-            this._tbytes = xdr.xdrDecodeLong();
-            this._fbytes = xdr.xdrDecodeLong();
-            this._abytes = xdr.xdrDecodeLong();
-            this._tfiles = xdr.xdrDecodeLong();
-            this._ffiles = xdr.xdrDecodeLong();
-            this._afiles = xdr.xdrDecodeLong();
-            this._invarsec = xdr.xdrDecodeInt();
+            this._tbytes = xdr.XdrDecodeLong();
+            this._fbytes = xdr.XdrDecodeLong();
+            this._abytes = xdr.XdrDecodeLong();
+            this._tfiles = xdr.XdrDecodeLong();
+            this._ffiles = xdr.XdrDecodeLong();
+            this._afiles = xdr.XdrDecodeLong();
+            this._invarsec = xdr.XdrDecodeInt();
         }
 
         public long TotalSize
@@ -106,12 +106,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public FSStatisticsAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this.obj_attributes.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this.obj_attributes.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this.obj_attributes = new PostOperationAttributes(xdr); }
 
         public PostOperationAttributes Attributes

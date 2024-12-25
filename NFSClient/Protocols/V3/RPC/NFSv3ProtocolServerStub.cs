@@ -3,9 +3,9 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 using System.Net;
-using org.acplt.oncrpc.server;
+using NFSLibrary.RPC.XDR.Server;
 
 /**
  */

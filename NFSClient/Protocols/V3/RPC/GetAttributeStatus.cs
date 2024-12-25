@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using NFSLibrary.Protocols.Commons;
-using org.acplt.oncrpc;
+using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
@@ -16,12 +16,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public GetAttributeAccessOK(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._obj_attributes.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._obj_attributes.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this._obj_attributes = new FileAttributes(xdr); }
 
         public FileAttributes Attributes
