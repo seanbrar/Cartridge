@@ -133,12 +133,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public FSInfoAccessFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this.obj_attributes.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this.obj_attributes.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this.obj_attributes = new PostOperationAttributes(xdr); }
 
         public PostOperationAttributes Attributes

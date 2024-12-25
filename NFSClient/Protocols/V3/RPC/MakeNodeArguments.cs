@@ -68,16 +68,16 @@ namespace NFSLibrary.Protocols.V3.RPC
 
             switch (this._type)
             {
-                case NFSItemTypes.NFCHR:
+                case NFSItemTypes.Character:
                     this._device_chr.XdrEncode(xdr);
                     break;
-                case NFSItemTypes.NFBLK:
+                case NFSItemTypes.Block:
                     this._device_blk.XdrEncode(xdr);
                     break;
-                case NFSItemTypes.NFSOCK:
+                case NFSItemTypes.Socket:
                     this._pipe_attributes_sock.XdrEncode(xdr);
                     break;
-                case NFSItemTypes.NFFIFO:
+                case NFSItemTypes.NamedPipe:
                     this._pipe_attributes_fifo.XdrEncode(xdr);
                     break;
                 default:
@@ -91,16 +91,16 @@ namespace NFSLibrary.Protocols.V3.RPC
 
             switch (this._type)
             {
-                case NFSItemTypes.NFCHR:
+                case NFSItemTypes.Character:
                     this._device_chr = new DeviceData(xdr);
                     break;
-                case NFSItemTypes.NFBLK:
+                case NFSItemTypes.Block:
                     this._device_blk = new DeviceData(xdr);
                     break;
-                case NFSItemTypes.NFSOCK:
+                case NFSItemTypes.Socket:
                     this._pipe_attributes_sock = new MakeAttributes(xdr);
                     break;
-                case NFSItemTypes.NFFIFO:
+                case NFSItemTypes.NamedPipe:
                     this._pipe_attributes_fifo = new MakeAttributes(xdr);
                     break;
                 default:
@@ -158,15 +158,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public DeviceData(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._dev_attributes.xdrEncode(xdr);
-            this._spec.xdrEncode(xdr);
+            this._dev_attributes.XdrEncode(xdr);
+            this._spec.XdrEncode(xdr);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             this._dev_attributes = new MakeAttributes(xdr);
             this._spec = new SpecInformation(xdr);
@@ -180,7 +180,7 @@ namespace NFSLibrary.Protocols.V3.RPC
             { this._dev_attributes = value; }
         }
 
-        public SpecInformation Specifications
+        public SpecInformation Spec
         {
             get
             { return this._spec; }

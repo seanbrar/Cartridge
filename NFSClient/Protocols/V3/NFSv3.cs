@@ -602,7 +602,7 @@ namespace NFSLibrary.Protocols.V3
 
             NFSAttributes Attributes = GetItemAttributes(DirectoryFullName);
 
-            return (Attributes != null && Attributes.NFSType == NFSItemTypes.NFDIR);
+            return (Attributes != null && Attributes.NFSType == NFSItemTypes.Directory);
         }
 
         public void CompleteIO()

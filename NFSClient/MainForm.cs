@@ -414,7 +414,7 @@ namespace NFSClient
                 NFSLibrary.Protocols.Commons.NFSAttributes nfsAttribute = nfsClient.GetItemAttributes(nfsClient.Combine(Item, RemoteFolder));
                 if (nfsAttribute != null)
                 {
-                    if (nfsAttribute.NFSType == NFSLibrary.Protocols.Commons.NFSItemTypes.NFDIR)
+                    if (nfsAttribute.NFSType == NFSLibrary.Protocols.Commons.NFSItemTypes.Directory)
                     {
                         ListViewItem lvi = new ListViewItem(new string[] { Item, nfsAttribute.Size.ToString(), nfsAttribute.Mode.ToString(), nfsAttribute.CreateDateTime.ToString() });
                         lvi.ImageIndex = 1;
@@ -422,7 +422,7 @@ namespace NFSClient
                         folders++;
                     }
                     else
-                        if (nfsAttribute.NFSType == NFSLibrary.Protocols.Commons.NFSItemTypes.NFREG)
+                        if (nfsAttribute.NFSType == NFSLibrary.Protocols.Commons.NFSItemTypes.Regular)
                         {
                             ListViewItem lvi = new ListViewItem(new string[] { Item, nfsAttribute.Size.ToString(), nfsAttribute.Mode.ToString(), nfsAttribute.ModifiedDateTime.ToString(), nfsAttribute.LastAccessedDateTime.ToString() });
                             if (Item == "..")

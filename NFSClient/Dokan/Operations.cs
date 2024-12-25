@@ -272,7 +272,7 @@ namespace Dokan
                 if (nfsAttributes == null)
                     return DokanNet.DOKAN_ERROR;
 
-                if (nfsAttributes.NFSType == NFSLibrary.Protocols.Commons.NFSItemTypes.NFDIR)
+                if (nfsAttributes.NFSType == NFSLibrary.Protocols.Commons.NFSItemTypes.Directory)
                     fileinfo.Attributes = System.IO.FileAttributes.Directory;
                 else
                     fileinfo.Attributes = System.IO.FileAttributes.Archive;
@@ -310,7 +310,7 @@ namespace Dokan
                     if (nfsAttributes != null)
                     {
                         FileInformation fi = new FileInformation();
-                        fi.Attributes = nfsAttributes.NFSType == NFSLibrary.Protocols.Commons.NFSItemTypes.NFDIR ? System.IO.FileAttributes.Directory : System.IO.FileAttributes.Normal;
+                        fi.Attributes = nfsAttributes.NFSType == NFSLibrary.Protocols.Commons.NFSItemTypes.Directory ? System.IO.FileAttributes.Directory : System.IO.FileAttributes.Normal;
                         fi.CreationTime = nfsAttributes.CreateDateTime;
                         fi.LastAccessTime = nfsAttributes.LastAccessedDateTime;
                         fi.LastWriteTime = nfsAttributes.ModifiedDateTime;

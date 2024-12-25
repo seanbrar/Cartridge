@@ -103,12 +103,12 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public ReadFolderAccessResultFAIL(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
-        { this._dir_attributes.xdrEncode(xdr); }
+        public void XdrEncode(XdrEncodingStream xdr)
+        { this._dir_attributes.XdrEncode(xdr); }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         { this._dir_attributes = new PostOperationAttributes(xdr); }
 
         public PostOperationAttributes Attributes

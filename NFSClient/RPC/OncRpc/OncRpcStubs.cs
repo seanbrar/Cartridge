@@ -1,4 +1,5 @@
 using NFSLibrary.RPC.XDR;
+using System.Net;
 
 namespace NFSLibrary.RPC.OncRpc
 {
@@ -13,6 +14,11 @@ namespace NFSLibrary.RPC.OncRpc
         {
             RpcClient = rpcClient;
         }
+
+        protected OncRpcClientStub(IPAddress host, int program, int version, int port, int protocol, bool useSecurePort)
+        {
+            RpcClient = new OncRpcClient(host, program, version, port, useSecurePort);
+        }
     }
 
     /// <summary>
@@ -20,11 +26,13 @@ namespace NFSLibrary.RPC.OncRpc
     /// </summary>
     public abstract class OncRpcServerStub
     {
-        protected readonly INFSRpcClient RpcClient;
+        protected readonly IPAddress BindAddress;
+        protected readonly int Port;
 
-        protected OncRpcServerStub(INFSRpcClient rpcClient)
+        protected OncRpcServerStub(IPAddress bindAddr, int port)
         {
-            RpcClient = rpcClient;
+            BindAddress = bindAddr;
+            Port = port;
         }
     }
 
@@ -33,7 +41,7 @@ namespace NFSLibrary.RPC.OncRpc
     /// </summary>
     public interface OncRpcDispatchable
     {
-        void DispatchOperation(int operation, XdrDecodingStream xdr, XdrEncodingStream xdr2);
+        void DispatchOperation(int procedure, XdrDecodingStream xdr, XdrEncodingStream xdr2);
     }
 
     /// <summary>

@@ -68,6 +68,7 @@ namespace NFSLibrary.RPC.XDR
 
         public byte[] GetBytes()
         {
+            _writer.Flush();
             return _buffer.ToArray();
         }
 

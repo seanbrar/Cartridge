@@ -131,25 +131,25 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public FolderEntry(XdrDecodingStream xdr)
-        { xdrDecode(xdr); }
+        { XdrDecode(xdr); }
 
-        public void xdrEncode(XdrEncodingStream xdr)
+        public void XdrEncode(XdrEncodingStream xdr)
         {
             FolderEntry _this = this;
 
             do
             {
                 xdr.xdrEncodeLong(_this._fileid);
-                _this._name.xdrEncode(xdr);
-                _this._cookie.xdrEncode(xdr);
-                _this._name_attributes.xdrEncode(xdr);
-                _this._name_handle.xdrEncode(xdr);
+                _this._name.XdrEncode(xdr);
+                _this._cookie.XdrEncode(xdr);
+                _this._name_attributes.XdrEncode(xdr);
+                _this._name_handle.XdrEncode(xdr);
                 _this = _this._nextentry;
                 xdr.xdrEncodeBoolean(_this != null);
             } while (_this != null);
         }
 
-        public void xdrDecode(XdrDecodingStream xdr)
+        public void XdrDecode(XdrDecodingStream xdr)
         {
             FolderEntry _this = this;
             FolderEntry _next;

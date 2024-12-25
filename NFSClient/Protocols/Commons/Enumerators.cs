@@ -8,18 +8,6 @@
  */
 namespace NFSLibrary.Protocols.Commons
 {
-    public enum NFSItemTypes
-    {
-        NFNON = 0,
-        NFREG = 1,
-        NFDIR = 2,
-        NFBLK = 3,
-        NFCHR = 4,
-        NFLNK = 5,
-        NFSOCK = 6,
-        NFFIFO = 7
-    }
-
     public enum NFSStats
     {
         NFS_OK = 0,

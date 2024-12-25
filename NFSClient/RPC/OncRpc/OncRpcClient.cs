@@ -7,7 +7,7 @@ namespace NFSLibrary.RPC.OncRpc
     /// <summary>
     /// Base class for ONC/RPC client connections.
     /// </summary>
-    public class OncRpcClient : IDisposable
+    public class OncRpcClient : INFSRpcClient, IDisposable
     {
         private readonly Socket _socket;
         private readonly IPEndPoint _endpoint;
@@ -33,6 +33,11 @@ namespace NFSLibrary.RPC.OncRpc
         public void Connect()
         {
             _socket.Connect(_endpoint);
+        }
+
+        public void Disconnect()
+        {
+            _socket.Disconnect(true);
         }
 
         public void Call(int procedure, XdrAble args, XdrAble result)
