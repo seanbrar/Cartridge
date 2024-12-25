@@ -1,4 +1,4 @@
-using NFSLibrary.RPC.XDR;
+using NFSClient.RPC.XDR;
 using System.Net;
 using System.Net.Sockets;
 

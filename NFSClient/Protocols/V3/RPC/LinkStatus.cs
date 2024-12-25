@@ -3,10 +3,10 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using NFSLibrary.Protocols.Commons;
-using NFSLibrary.RPC.XDR;
+using NFSClient.Protocols.Commons;
+using NFSClient.RPC.XDR;
 
-namespace NFSLibrary.Protocols.V3.RPC
+namespace NFSClient.Protocols.V3.RPC
 {
     public class LinkAccessOK : IXdrData
     {
@@ -21,14 +21,12 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._file_attributes.XdrEncode(xdr);
-            this._linkdir_wcc.XdrEncode(xdr);
+            // Implementation will be added in subsequent sections
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._file_attributes = new PostOperationAttributes(xdr);
-            this._linkdir_wcc = new WritingData(xdr);
+            // Implementation will be added in subsequent sections
         }
 
         public PostOperationAttributes Attributes

@@ -1,4 +1,4 @@
-using NFSLibrary.RPC.XDR;
+using NFSClient.RPC.XDR;
 
 namespace NFSLibrary.RPC.OncRpc
 {

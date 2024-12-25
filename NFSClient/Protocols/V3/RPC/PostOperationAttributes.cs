@@ -3,9 +3,9 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using NFSLibrary.RPC.XDR;
+using NFSClient.RPC.XDR;
 
-namespace NFSLibrary.Protocols.V3.RPC
+namespace NFSClient.Protocols.V3.RPC
 {
     public class PostOperationAttributes : IXdrData
     {

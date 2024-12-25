@@ -1,4 +1,4 @@
-namespace NFSLibrary.RPC.XDR
+namespace NFSClient.RPC.XDR
 {
     /// <summary>
     /// Represents a serializable XDR integer value.

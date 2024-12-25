@@ -4,7 +4,7 @@
  * See http://remotetea.sourceforge.net for details
  */
 using System;
-using NFSLibrary.RPC.XDR;
+using NFSClient.RPC.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {

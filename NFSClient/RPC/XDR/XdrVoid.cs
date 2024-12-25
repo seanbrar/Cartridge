@@ -1,6 +1,6 @@
-using NFSLibrary.RPC.XDR;
+using NFSClient.RPC.XDR;
 
-namespace NFSLibrary.RPC.XDR
+namespace NFSClient.RPC.XDR
 {
     /// <summary>
     /// Represents a void XDR value, used for procedures that don't take parameters or return values.

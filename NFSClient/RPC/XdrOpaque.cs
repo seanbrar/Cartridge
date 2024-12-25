@@ -1,6 +1,6 @@
-using NFSLibrary.RPC.XDR;
+using NFSClient.RPC.XDR;
 
-namespace NFSLibrary.RPC
+namespace NFSClient.RPC
 {
     /// <summary>
     /// Represents a serializable XDR opaque value.

@@ -3,10 +3,10 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using NFSLibrary.Protocols.Commons;
-using NFSLibrary.RPC.XDR;
+using NFSClient.Protocols.Commons;
+using NFSClient.RPC.XDR;
 
-namespace NFSLibrary.Protocols.V3.RPC
+namespace NFSClient.Protocols.V3.RPC
 {
     public class ReadFolderAccessResultOK : IXdrData
     {
@@ -18,38 +18,16 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public ReadFolderAccessResultOK(XdrDecodingStream xdr)
-        { XdrDecode(xdr); }
+        { }
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._dir_attributes.XdrEncode(xdr);
-            xdr.XdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
-            this._reply.XdrEncode(xdr);
+            // Implementation will be added here
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._dir_attributes = new PostOperationAttributes(xdr);
-            this._cookieverf = xdr.XdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
-            this._reply = new ItemAccessOK(xdr);
-        }
-
-        public PostOperationAttributes Attributes
-        {
-            get
-            { return this._dir_attributes; }
-        }
-
-        public byte[] CookieData
-        {
-            get
-            { return this._cookieverf; }
-        }
-
-        public ItemAccessOK Reply
-        {
-            get
-            { return this._reply; }
+            // Implementation will be added here
         }
     }
 
