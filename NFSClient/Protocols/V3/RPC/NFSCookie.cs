@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class NFSCookie : XdrAble
+    public class NFSCookie : IXdrData
     {
         private long _value;
 

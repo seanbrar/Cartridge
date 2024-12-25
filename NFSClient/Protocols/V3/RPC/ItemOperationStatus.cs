@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class ItemOperationAccessResultOK : XdrAble
+    public class ItemOperationAccessResultOK : IXdrData
     {
         private NFSHandle _obj;
         private PostOperationAttributes _obj_attributes;
@@ -55,7 +55,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class ItemOperationAccessResultFAIL : XdrAble
+    public class ItemOperationAccessResultFAIL : IXdrData
     {
         private PostOperationAttributes _dir_attributes;
 

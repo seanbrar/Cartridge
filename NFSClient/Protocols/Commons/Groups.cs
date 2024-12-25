@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {
-    public class Groups : XdrAble
+    public class Groups : IXdrData
     {
         private GroupNode _value;
 
@@ -42,7 +42,7 @@ namespace NFSLibrary.Protocols.Commons
         }
     }
 
-    public class GroupNode : XdrAble
+    public class GroupNode : IXdrData
     {
         private Name _grname;
         private Groups _grnext;

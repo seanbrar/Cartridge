@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class SetAttributeArguments : XdrAble
+    public class SetAttributeArguments : IXdrData
     {
         private NFSHandle _obj;
         private MakeAttributes _new_attributes;
@@ -23,22 +23,22 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._obj.XdrEncode(xdr);
-            this._new_attributes.XdrEncode(xdr);
-            xdr.xdrEncodeBoolean(this._guardcheck);
-            if (this._guardcheck)
-            { this._guardctime.XdrEncode(xdr); }
+            _obj.XdrEncode(xdr);
+            _new_attributes.XdrEncode(xdr);
+            xdr.XdrEncodeBoolean(_guardcheck);
+            if (_guardcheck)
+            { _guardctime.XdrEncode(xdr); }
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._obj = new NFSHandle();
-            this._obj.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._obj.XdrDecode(xdr);
-            this._new_attributes = new MakeAttributes(xdr);
-            this._guardcheck = xdr.xdrDecodeBoolean();
-            if (this._guardcheck)
-            { this._guardctime = new NFSTimeValue(xdr); }
+            _obj = new NFSHandle();
+            _obj.Version = V3.RPC.NFSv3Protocol.NFS_V3;
+            _obj.XdrDecode(xdr);
+            _new_attributes = new MakeAttributes(xdr);
+            _guardcheck = xdr.XdrDecodeBoolean();
+            if (_guardcheck)
+            { _guardctime = new NFSTimeValue(xdr); }
         }
 
         public NFSHandle Handle

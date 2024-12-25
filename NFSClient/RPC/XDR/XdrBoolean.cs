@@ -5,7 +5,7 @@ namespace NFSLibrary.RPC
     /// <summary>
     /// Represents a serializable XDR boolean value.
     /// </summary>
-    public class XdrBoolean : XdrAble
+    public class XdrBoolean : IXdrData
     {
         private bool value;
 
@@ -26,12 +26,12 @@ namespace NFSLibrary.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.XdrEncodeBoolean(value);
+            xdr.xdrEncodeBoolean(value);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            value = xdr.XdrDecodeBoolean();
+            value = xdr.xdrDecodeBoolean();
         }
     }
 } 

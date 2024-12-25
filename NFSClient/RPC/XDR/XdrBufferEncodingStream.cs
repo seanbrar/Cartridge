@@ -1,3 +1,5 @@
+using System;
+using System.Net;
 using System.Text;
 
 namespace NFSLibrary.RPC.XDR
@@ -7,75 +9,120 @@ namespace NFSLibrary.RPC.XDR
     /// </summary>
     public class XdrBufferEncodingStream : XdrEncodingStream
     {
-        private readonly MemoryStream _buffer;
-        private readonly BinaryWriter _writer;
+        private readonly byte[] _buffer;
+        private int _position;
 
-        public XdrBufferEncodingStream(int initialSize = 1024)
+        public XdrBufferEncodingStream(int size)
         {
-            _buffer = new MemoryStream(initialSize);
-            _writer = new BinaryWriter(_buffer);
+            _buffer = new byte[size];
+            _position = 0;
         }
 
-        public override void XdrEncodeInt(int value)
+        public byte[] GetBuffer() => _buffer;
+        public int GetBufferLength() => _position;
+
+        public override void xdrEncodeBoolean(bool value)
         {
-            _writer.Write(IPAddress.HostToNetworkOrder(value));
+            xdrEncodeInt(value ? 1 : 0);
         }
 
-        public override void XdrEncodeLong(long value)
+        public override void xdrEncodeByte(byte value)
         {
-            _writer.Write(IPAddress.HostToNetworkOrder(value));
+            EnsureSpace(4);
+            _buffer[_position++] = 0;
+            _buffer[_position++] = 0;
+            _buffer[_position++] = 0;
+            _buffer[_position++] = value;
         }
 
-        public override void XdrEncodeFloat(float value)
+        public override void xdrEncodeShort(short value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
-            if (BitConverter.IsLittleEndian)
-                Array.Reverse(bytes);
-            _writer.Write(bytes);
+            xdrEncodeInt(value);
         }
 
-        public override void XdrEncodeDouble(double value)
+        public override void xdrEncodeInt(int value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
-            if (BitConverter.IsLittleEndian)
-                Array.Reverse(bytes);
-            _writer.Write(bytes);
+            EnsureSpace(4);
+            _buffer[_position++] = (byte)((value >> 24) & 0xFF);
+            _buffer[_position++] = (byte)((value >> 16) & 0xFF);
+            _buffer[_position++] = (byte)((value >> 8) & 0xFF);
+            _buffer[_position++] = (byte)(value & 0xFF);
         }
 
-        public override void XdrEncodeBoolean(bool value)
+        public override void xdrEncodeLong(long value)
         {
-            XdrEncodeInt(value ? 1 : 0);
+            EnsureSpace(8);
+            _buffer[_position++] = (byte)((value >> 56) & 0xFF);
+            _buffer[_position++] = (byte)((value >> 48) & 0xFF);
+            _buffer[_position++] = (byte)((value >> 40) & 0xFF);
+            _buffer[_position++] = (byte)((value >> 32) & 0xFF);
+            _buffer[_position++] = (byte)((value >> 24) & 0xFF);
+            _buffer[_position++] = (byte)((value >> 16) & 0xFF);
+            _buffer[_position++] = (byte)((value >> 8) & 0xFF);
+            _buffer[_position++] = (byte)(value & 0xFF);
         }
 
-        public override void XdrEncodeString(string value)
+        public override void xdrEncodeFloat(float value)
         {
+            xdrEncodeInt(BitConverter.ToInt32(BitConverter.GetBytes(value), 0));
+        }
+
+        public override void xdrEncodeDouble(double value)
+        {
+            xdrEncodeLong(BitConverter.ToInt64(BitConverter.GetBytes(value), 0));
+        }
+
+        public override void xdrEncodeString(string value)
+        {
+            if (value == null)
+            {
+                xdrEncodeInt(0);
+                return;
+            }
+
             byte[] bytes = Encoding.UTF8.GetBytes(value);
-            XdrEncodeInt(bytes.Length);
-            _writer.Write(bytes);
-            int padding = (4 - (bytes.Length % 4)) % 4;
-            for (int i = 0; i < padding; i++)
-                _writer.Write((byte)0);
+            xdrEncodeInt(bytes.Length);
+            xdrEncodeOpaque(bytes);
         }
 
-        public override void XdrEncodeOpaque(byte[] value)
+        public override void xdrEncodeOpaque(byte[] value)
         {
-            XdrEncodeInt(value.Length);
-            _writer.Write(value);
-            int padding = (4 - (value.Length % 4)) % 4;
-            for (int i = 0; i < padding; i++)
-                _writer.Write((byte)0);
+            if (value == null)
+            {
+                xdrEncodeInt(0);
+                return;
+            }
+
+            int length = value.Length;
+            int padding = (4 - (length & 3)) & 3;
+            
+            EnsureSpace(length + padding);
+            Array.Copy(value, 0, _buffer, _position, length);
+            _position += length;
+
+            // Add padding
+            while (padding-- > 0)
+            {
+                _buffer[_position++] = 0;
+            }
         }
 
-        public byte[] GetBytes()
+        public override void xdrEncodeIPAddress(IPAddress value)
         {
-            _writer.Flush();
-            return _buffer.ToArray();
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            byte[] addressBytes = value.GetAddressBytes();
+            if (addressBytes.Length != 4)
+                throw new ArgumentException("Only IPv4 addresses are supported", nameof(value));
+
+            xdrEncodeOpaque(addressBytes);
         }
 
-        public override void Dispose()
+        private void EnsureSpace(int needed)
         {
-            _writer.Dispose();
-            _buffer.Dispose();
+            if (_position + needed > _buffer.Length)
+                throw new InvalidOperationException("Buffer overflow");
         }
     }
 } 

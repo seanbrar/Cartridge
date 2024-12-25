@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class MakeNodeAccessOK : XdrAble
+    public class MakeNodeAccessOK : IXdrData
     {
         private NFSHandle _obj;
         private PostOperationAttributes _obj_attributes;
@@ -22,40 +22,37 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._obj.XdrEncode(xdr);
-            this._obj_attributes.XdrEncode(xdr);
-            this._dir_wcc.XdrEncode(xdr);
+            _obj.XdrEncode(xdr);
+            _obj_attributes.XdrEncode(xdr);
+            _dir_wcc.XdrEncode(xdr);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._obj = new NFSHandle();
-            this._obj.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._obj.XdrDecode(xdr);
-            this._obj_attributes = new PostOperationAttributes(xdr);
-            this._dir_wcc = new WritingData(xdr);
+            _obj = new NFSHandle();
+            _obj.Version = V3.RPC.NFSv3Protocol.NFS_V3;
+            _obj.XdrDecode(xdr);
+            _obj_attributes = new PostOperationAttributes(xdr);
+            _dir_wcc = new WritingData(xdr);
         }
 
         public NFSHandle Handle
         {
-            get
-            { return this._obj; }
+            get { return _obj; }
         }
 
         public PostOperationAttributes Attributes
         {
-            get
-            { return this._obj_attributes; }
+            get { return _obj_attributes; }
         }
 
         public WritingData Data
         {
-            get
-            { return this._dir_wcc; }
+            get { return _dir_wcc; }
         }
     }
 
-    public class MakeNodeAccessFAIL : XdrAble
+    public class MakeNodeAccessFAIL : IXdrData
     {
         private WritingData _dir_wcc;
 
@@ -66,15 +63,14 @@ namespace NFSLibrary.Protocols.V3.RPC
         { XdrDecode(xdr); }
 
         public void XdrEncode(XdrEncodingStream xdr)
-        { this._dir_wcc.XdrEncode(xdr); }
+        { _dir_wcc.XdrEncode(xdr); }
 
         public void XdrDecode(XdrDecodingStream xdr)
-        { this._dir_wcc = new WritingData(xdr); }
+        { _dir_wcc = new WritingData(xdr); }
 
         public WritingData Data
         {
-            get
-            { return this._dir_wcc; }
+            get { return _dir_wcc; }
         }
     }
     // End of MKNOD3res.cs

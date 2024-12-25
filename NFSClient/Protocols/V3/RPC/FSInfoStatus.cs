@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class FSInfoAccessOK : XdrAble
+    public class FSInfoAccessOK : IXdrData
     {
         private PostOperationAttributes _obj_attributes;
         private int _rtmax;
@@ -30,32 +30,32 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._obj_attributes.XdrEncode(xdr);
-            xdr.XdrEncodeInt(this._rtmax);
-            xdr.XdrEncodeInt(this._rtpref);
-            xdr.XdrEncodeInt(this._rtmult);
-            xdr.XdrEncodeInt(this._wtmax);
-            xdr.XdrEncodeInt(this._wtpref);
-            xdr.XdrEncodeInt(this._wtmult);
-            xdr.XdrEncodeInt(this._dtpref);
-            xdr.XdrEncodeLong(this._maxfilesize);
-            this._time_delta.XdrEncode(xdr);
-            xdr.XdrEncodeInt(this._properties);
+            _obj_attributes.XdrEncode(xdr);
+            xdr.XdrEncodeInt(_rtmax);
+            xdr.XdrEncodeInt(_rtpref);
+            xdr.XdrEncodeInt(_rtmult);
+            xdr.XdrEncodeInt(_wtmax);
+            xdr.XdrEncodeInt(_wtpref);
+            xdr.XdrEncodeInt(_wtmult);
+            xdr.XdrEncodeInt(_dtpref);
+            xdr.XdrEncodeLong(_maxfilesize);
+            _time_delta.XdrEncode(xdr);
+            xdr.XdrEncodeInt(_properties);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._obj_attributes = new PostOperationAttributes(xdr);
-            this._rtmax = xdr.XdrDecodeInt();
-            this._rtpref = xdr.XdrDecodeInt();
-            this._rtmult = xdr.XdrDecodeInt();
-            this._wtmax = xdr.XdrDecodeInt();
-            this._wtpref = xdr.XdrDecodeInt();
-            this._wtmult = xdr.XdrDecodeInt();
-            this._dtpref = xdr.XdrDecodeInt();
-            this._maxfilesize = xdr.XdrDecodeLong();
-            this._time_delta = new NFSTimeValue(xdr);
-            this._properties = xdr.XdrDecodeInt();
+            _obj_attributes = new PostOperationAttributes(xdr);
+            _rtmax = xdr.XdrDecodeInt();
+            _rtpref = xdr.XdrDecodeInt();
+            _rtmult = xdr.XdrDecodeInt();
+            _wtmax = xdr.XdrDecodeInt();
+            _wtpref = xdr.XdrDecodeInt();
+            _wtmult = xdr.XdrDecodeInt();
+            _dtpref = xdr.XdrDecodeInt();
+            _maxfilesize = xdr.XdrDecodeLong();
+            _time_delta = new NFSTimeValue(xdr);
+            _properties = xdr.XdrDecodeInt();
         }
 
         public int MaximumReadRequestSize
@@ -125,7 +125,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class FSInfoAccessFAIL : XdrAble
+    public class FSInfoAccessFAIL : IXdrData
     {
         private PostOperationAttributes obj_attributes;
 

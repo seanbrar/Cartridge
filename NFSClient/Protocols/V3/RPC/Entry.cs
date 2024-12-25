@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class Entry : XdrAble
+    public class Entry : IXdrData
     {
         private long _fileid;
         private Name _name;
@@ -27,13 +27,13 @@ namespace NFSLibrary.Protocols.V3.RPC
 
             do
             {
-                xdr.xdrEncodeLong(_this._fileid);
+                xdr.XdrEncodeLong(_this._fileid);
 
                 _this._name.XdrEncode(xdr);
                 _this._cookie.XdrEncode(xdr);
                 _this = _this._nextentry;
 
-                xdr.xdrEncodeBoolean(_this != null);
+                xdr.XdrEncodeBoolean(_this != null);
             } while (_this != null);
         }
 
@@ -44,10 +44,10 @@ namespace NFSLibrary.Protocols.V3.RPC
 
             do
             {
-                _this._fileid = xdr.xdrDecodeLong();
+                _this._fileid = xdr.XdrDecodeLong();
                 _this._name = new Name(xdr);
                 _this._cookie = new NFSCookie(xdr);
-                _next = xdr.xdrDecodeBoolean() ? new Entry() : null;
+                _next = xdr.XdrDecodeBoolean() ? new Entry() : null;
                 _this._nextentry = _next;
                 _this = _next;
             } while (_this != null);

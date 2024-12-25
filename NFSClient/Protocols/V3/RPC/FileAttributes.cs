@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class FileAttributes : XdrAble
+    public class FileAttributes : IXdrData
     {
         private NFSItemTypes _type;
         private NFSPermission _mode;

@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class SpecInformation : XdrAble
+    public class SpecInformation : IXdrData
     {
         private int _specdata1;
         private int _specdata2;
@@ -16,15 +16,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public SpecInformation(XdrDecodingStream xdr)
-        { XdrDecode(xdr); }
+        { xdrDecode(xdr); }
 
-        public void XdrEncode(XdrEncodingStream xdr)
+        public void xdrEncode(XdrEncodingStream xdr)
         {
             xdr.XdrEncodeInt(this._specdata1);
             xdr.XdrEncodeInt(this._specdata2);
         }
 
-        public void XdrDecode(XdrDecodingStream xdr)
+        public void xdrDecode(XdrDecodingStream xdr)
         {
             this._specdata1 = xdr.XdrDecodeInt();
             this._specdata2 = xdr.XdrDecodeInt();

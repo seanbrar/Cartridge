@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class WritingData : XdrAble
+    public class WritingData : IXdrData
     {
         private PreOperationAttributes _before;
         private PostOperationAttributes _after;
@@ -16,15 +16,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public WritingData(XdrDecodingStream xdr)
-        { XdrDecode(xdr); }
+        { xdrDecode(xdr); }
 
-        public void XdrEncode(XdrEncodingStream xdr)
+        public void xdrEncode(XdrEncodingStream xdr)
         {
-            this._before.XdrEncode(xdr);
-            this._after.XdrEncode(xdr);
+            this._before.xdrEncode(xdr);
+            this._after.xdrEncode(xdr);
         }
 
-        public void XdrDecode(XdrDecodingStream xdr)
+        public void xdrDecode(XdrDecodingStream xdr)
         {
             this._before = new PreOperationAttributes(xdr);
             this._after = new PostOperationAttributes(xdr);

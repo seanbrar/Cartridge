@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class ReadLinkAccessOK : XdrAble
+    public class ReadLinkAccessOK : IXdrData
     {
         private PostOperationAttributes _symlink_attributes;
         private Name _data;
@@ -44,7 +44,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class ReadLinkAccessFAIL : XdrAble
+    public class ReadLinkAccessFAIL : IXdrData
     {
         private PostOperationAttributes _symlink_attributes;
 

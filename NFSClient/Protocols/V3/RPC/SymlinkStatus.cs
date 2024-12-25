@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class SymlinkAccessOK : XdrAble
+    public class SymlinkAccessOK : IXdrData
     {
         private NFSHandle _obj;
         private PostOperationAttributes _obj_attributes;
@@ -55,7 +55,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class SymlinkAccessFAIL : XdrAble
+    public class SymlinkAccessFAIL : IXdrData
     {
         private WritingData _dir_wcc;
 

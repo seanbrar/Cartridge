@@ -5,7 +5,7 @@ namespace NFSLibrary.RPC
     /// <summary>
     /// Represents a serializable XDR opaque value.
     /// </summary>
-    public class XdrOpaque : XdrAble
+    public class XdrOpaque : IXdrData
     {
         private byte[] value;
 
@@ -24,14 +24,14 @@ namespace NFSLibrary.RPC
             return this.value;
         }
 
-        public void XdrEncode(XdrEncodingStream xdr)
+        public void xdrEncode(XdrEncodingStream xdr)
         {
-            xdr.XdrEncodeOpaque(value);
+            xdr.xdrEncodeOpaque(value);
         }
 
-        public void XdrDecode(XdrDecodingStream xdr)
+        public void xdrDecode(XdrDecodingStream xdr)
         {
-            value = xdr.XdrDecodeOpaque();
+            value = xdr.xdrDecodeOpaque();
         }
     }
 } 

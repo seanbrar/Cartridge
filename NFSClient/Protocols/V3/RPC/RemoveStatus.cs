@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class RemoveAccessOK : XdrAble
+    public class RemoveAccessOK : IXdrData
     {
         private WritingData _dir_wcc;
 
@@ -31,7 +31,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class RemoveAccessFAIL : XdrAble
+    public class RemoveAccessFAIL : IXdrData
     {
         private WritingData _dir_wcc;
 

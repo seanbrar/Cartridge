@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class ExtendedReadFolderArguments : XdrAble
+    public class ExtendedReadFolderArguments : IXdrData
     {
         private NFSHandle _dir;
         private NFSCookie _cookie;
@@ -24,22 +24,22 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._dir.XdrEncode(xdr);
-            this._cookie.XdrEncode(xdr);
-            xdr.xdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
-            xdr.xdrEncodeInt(this._dircount);
-            xdr.xdrEncodeInt(this._maxcount);
+            _dir.XdrEncode(xdr);
+            _cookie.XdrEncode(xdr);
+            xdr.XdrEncodeOpaque(_cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
+            xdr.XdrEncodeInt(_dircount);
+            xdr.XdrEncodeInt(_maxcount);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._dir = new NFSHandle();
-            this._dir.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._dir.XdrDecode(xdr);
-            this._cookie = new NFSCookie(xdr);
-            this._cookieverf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
-            this._dircount = xdr.xdrDecodeInt();
-            this._maxcount = xdr.xdrDecodeInt();
+            _dir = new NFSHandle();
+            _dir.Version = V3.RPC.NFSv3Protocol.NFS_V3;
+            _dir.XdrDecode(xdr);
+            _cookie = new NFSCookie(xdr);
+            _cookieverf = xdr.XdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
+            _dircount = xdr.XdrDecodeInt();
+            _maxcount = xdr.XdrDecodeInt();
         }
 
         public NFSHandle Directory

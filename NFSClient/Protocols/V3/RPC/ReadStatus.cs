@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class ReadAccessOK : XdrAble
+    public class ReadAccessOK : IXdrData
     {
         private PostOperationAttributes _attributes;
         private int _count;
@@ -62,7 +62,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class ReadAccessFAIL : XdrAble
+    public class ReadAccessFAIL : IXdrData
     {
         private PostOperationAttributes _attributes;
 

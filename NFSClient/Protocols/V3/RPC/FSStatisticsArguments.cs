@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class FSStatisticsArguments : XdrAble
+    public class FSStatisticsArguments : IXdrData
     {
         private NFSHandle _fsroot;
 

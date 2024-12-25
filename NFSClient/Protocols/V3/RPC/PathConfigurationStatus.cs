@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class PathConfigurationAccessOK : XdrAble
+    public class PathConfigurationAccessOK : IXdrData
     {
         private PostOperationAttributes _obj_attributes;
         private int _linkmax;
@@ -27,23 +27,23 @@ namespace NFSLibrary.Protocols.V3.RPC
         public void XdrEncode(XdrEncodingStream xdr)
         {
             this._obj_attributes.XdrEncode(xdr);
-            xdr.xdrEncodeInt(this._linkmax);
-            xdr.xdrEncodeInt(this._name_max);
-            xdr.xdrEncodeBoolean(this._no_trunc);
-            xdr.xdrEncodeBoolean(this._chown_restricted);
-            xdr.xdrEncodeBoolean(this._case_insensitive);
-            xdr.xdrEncodeBoolean(this._case_preserving);
+            xdr.XdrEncodeInt(this._linkmax);
+            xdr.XdrEncodeInt(this._name_max);
+            xdr.XdrEncodeBoolean(this._no_trunc);
+            xdr.XdrEncodeBoolean(this._chown_restricted);
+            xdr.XdrEncodeBoolean(this._case_insensitive);
+            xdr.XdrEncodeBoolean(this._case_preserving);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
             this._obj_attributes = new PostOperationAttributes(xdr);
-            this._linkmax = xdr.xdrDecodeInt();
-            this._name_max = xdr.xdrDecodeInt();
-            this._no_trunc = xdr.xdrDecodeBoolean();
-            this._chown_restricted = xdr.xdrDecodeBoolean();
-            this._case_insensitive = xdr.xdrDecodeBoolean();
-            this._case_preserving = xdr.xdrDecodeBoolean();
+            this._linkmax = xdr.XdrDecodeInt();
+            this._name_max = xdr.XdrDecodeInt();
+            this._no_trunc = xdr.XdrDecodeBoolean();
+            this._chown_restricted = xdr.XdrDecodeBoolean();
+            this._case_insensitive = xdr.XdrDecodeBoolean();
+            this._case_preserving = xdr.XdrDecodeBoolean();
         }
 
         public PostOperationAttributes Attributes
@@ -89,7 +89,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class PathConfigurationAccessFAIL : XdrAble
+    public class PathConfigurationAccessFAIL : IXdrData
     {
         private PostOperationAttributes _obj_attributes;
 

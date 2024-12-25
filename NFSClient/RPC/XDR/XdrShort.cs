@@ -1,37 +1,39 @@
+// File: NFSClient/RPC/XDR/XdrShort.cs
+
 using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.RPC
 {
     /// <summary>
-    /// Represents a serializable XDR string value.
+    /// Represents a serializable XDR short value.
     /// </summary>
-    public class XdrString : IXdrData
+    public class XdrShort : IXdrData
     {
-        private string value;
+        private short value;
 
-        public XdrString(string value)
+        public XdrShort(short value)
         {
             this.value = value;
         }
 
-        public XdrString()
+        public XdrShort()
         {
-            this.value = string.Empty;
+            this.value = 0;
         }
 
-        public string StringValue()
+        public short ShortValue()
         {
             return this.value;
         }
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeString(value);
+            xdr.xdrEncodeInt(value);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            value = xdr.xdrDecodeString();
+            value = (short)xdr.xdrDecodeInt();
         }
     }
-} 
+}

@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class SymlinkArguments : XdrAble
+    public class SymlinkArguments : IXdrData
     {
         private ItemOperationArguments _where;
         private SymlinkData _symlink;
@@ -44,7 +44,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class SymlinkData : XdrAble
+    public class SymlinkData : IXdrData
     {
         private MakeAttributes _symlink_attributes;
         private Name _symlink_data;

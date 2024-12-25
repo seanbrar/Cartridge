@@ -5,7 +5,7 @@ namespace NFSLibrary.RPC
     /// <summary>
     /// Represents a serializable XDR integer value.
     /// </summary>
-    public class XdrInt : XdrAble
+    public class XdrInt : IXdrData
     {
         private int value;
 
@@ -26,12 +26,12 @@ namespace NFSLibrary.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.XdrEncodeInt(value);
+            xdr.xdrEncodeInt(value);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            value = xdr.XdrDecodeInt();
+            value = xdr.xdrDecodeInt();
         }
     }
 } 

@@ -1,26 +1,20 @@
 using NFSLibrary.RPC.XDR;
 
-namespace NFSLibrary.RPC
+namespace NFSClient.RPC.XDR
 {
     /// <summary>
     /// Represents a void XDR value, used for procedures that don't take parameters or return values.
     /// </summary>
-    public class XdrVoid : XdrAble
+    public sealed class XdrVoid : IXdrData
     {
-        public static readonly XdrVoid XDR_VOID = new XdrVoid();
-
-        public XdrVoid()
-        {
-        }
-
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            // No-op for void type
+            // No data to encode
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            // No-op for void type
+            // No data to decode
         }
     }
 } 

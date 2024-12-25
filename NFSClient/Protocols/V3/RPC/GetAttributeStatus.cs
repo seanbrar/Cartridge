@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class GetAttributeAccessOK : XdrAble
+    public class GetAttributeAccessOK : IXdrData
     {
         private FileAttributes _obj_attributes;
 

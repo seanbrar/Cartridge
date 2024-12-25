@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class CommitAccessOK : XdrAble
+    public class CommitAccessOK : IXdrData
     {
         private WritingData _file_wcc;
         private byte[] _verf;
@@ -22,13 +22,13 @@ namespace NFSLibrary.Protocols.V3.RPC
         public void XdrEncode(XdrEncodingStream xdr)
         {
             this._file_wcc.XdrEncode(xdr);
-            xdr.xdrEncodeOpaque(this._verf, NFSv3Protocol.NFS3_WRITEVERFSIZE);
+            xdr.XdrEncodeOpaque(this._verf, NFSv3Protocol.NFS3_WRITEVERFSIZE);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
             this._file_wcc = new WritingData(xdr);
-            this._verf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_WRITEVERFSIZE);
+            this._verf = xdr.XdrDecodeOpaque(NFSv3Protocol.NFS3_WRITEVERFSIZE);
         }
 
         public WritingData Data
@@ -44,7 +44,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class CommitAccessFAIL : XdrAble
+    public class CommitAccessFAIL : IXdrData
     {
         private WritingData _file_wcc;
 

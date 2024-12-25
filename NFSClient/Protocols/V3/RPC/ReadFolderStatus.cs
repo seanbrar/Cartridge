@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class ReadFolderAccessResultOK : XdrAble
+    public class ReadFolderAccessResultOK : IXdrData
     {
         private PostOperationAttributes _dir_attributes;
         private byte[] _cookieverf;
@@ -23,14 +23,14 @@ namespace NFSLibrary.Protocols.V3.RPC
         public void XdrEncode(XdrEncodingStream xdr)
         {
             this._dir_attributes.XdrEncode(xdr);
-            xdr.xdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
+            xdr.XdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
             this._reply.XdrEncode(xdr);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
             this._dir_attributes = new PostOperationAttributes(xdr);
-            this._cookieverf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
+            this._cookieverf = xdr.XdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
             this._reply = new ItemAccessOK(xdr);
         }
 
@@ -53,7 +53,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class ItemAccessOK : XdrAble
+    public class ItemAccessOK : IXdrData
     {
         private Entry _entries;
         private bool _eof;
@@ -68,18 +68,18 @@ namespace NFSLibrary.Protocols.V3.RPC
         {
             if (this._entries != null)
             {
-                xdr.xdrEncodeBoolean(true);
+                xdr.XdrEncodeBoolean(true);
                 this._entries.XdrEncode(xdr);
             }
-            else { xdr.xdrEncodeBoolean(false); };
+            else { xdr.XdrEncodeBoolean(false); };
 
-            xdr.xdrEncodeBoolean(this._eof);
+            xdr.XdrEncodeBoolean(this._eof);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._entries = xdr.xdrDecodeBoolean() ? new Entry(xdr) : null;
-            this._eof = xdr.xdrDecodeBoolean();
+            this._entries = xdr.XdrDecodeBoolean() ? new Entry(xdr) : null;
+            this._eof = xdr.XdrDecodeBoolean();
         }
 
         public Entry Entries
@@ -95,7 +95,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class ReadFolderAccessResultFAIL : XdrAble
+    public class ReadFolderAccessResultFAIL : IXdrData
     {
         private PostOperationAttributes _dir_attributes;
 

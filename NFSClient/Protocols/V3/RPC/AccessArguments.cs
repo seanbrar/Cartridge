@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class AccessArguments : XdrAble
+    public class AccessArguments : IXdrData
     {
         private NFSHandle _obj;
         private int _access;
@@ -22,7 +22,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         public void XdrEncode(XdrEncodingStream xdr)
         {
             this._obj.XdrEncode(xdr);
-            xdr.xdrEncodeInt(this._access);
+            xdr.XdrEncodeInt(this._access);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
@@ -30,7 +30,7 @@ namespace NFSLibrary.Protocols.V3.RPC
             this._obj = new NFSHandle();
             this._obj.Version = V3.RPC.NFSv3Protocol.NFS_V3;
             this._obj.XdrDecode(xdr);
-            this._access = xdr.xdrDecodeInt();
+            this._access = xdr.XdrDecodeInt();
         }
 
         public NFSHandle Handle

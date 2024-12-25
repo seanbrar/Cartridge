@@ -52,6 +52,6 @@ namespace NFSLibrary.RPC.OncRpc
         public int Program { get; set; }
         public int Version { get; set; }
         public int Procedure { get; set; }
-        public XdrAble Parameters { get; set; } = null!;
+        public IXdrData Parameters { get; set; } = null!;
     }
 } 

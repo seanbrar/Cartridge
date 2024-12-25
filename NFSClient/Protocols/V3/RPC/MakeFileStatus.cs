@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class MakeFileAccessOK : XdrAble
+    public class MakeFileAccessOK : IXdrData
     {
         private NFSHandle _handle;
         private PostOperationAttributes _attributes;
@@ -55,7 +55,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class MakeFileAccessFAIL : XdrAble
+    public class MakeFileAccessFAIL : IXdrData
     {
         private WritingData _dir_wcc;
 

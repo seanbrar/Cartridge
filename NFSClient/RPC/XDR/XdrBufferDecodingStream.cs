@@ -1,3 +1,5 @@
+using System;
+using System.Net;
 using System.Text;
 
 namespace NFSLibrary.RPC.XDR
@@ -7,68 +9,109 @@ namespace NFSLibrary.RPC.XDR
     /// </summary>
     public class XdrBufferDecodingStream : XdrDecodingStream
     {
-        private readonly MemoryStream _buffer;
-        private readonly BinaryReader _reader;
+        private readonly byte[] _buffer;
+        private int _position;
 
-        public XdrBufferDecodingStream(byte[] data)
+        public XdrBufferDecodingStream(byte[] buffer)
         {
-            _buffer = new MemoryStream(data);
-            _reader = new BinaryReader(_buffer);
+            _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
+            _position = 0;
         }
 
-        public override int XdrDecodeInt()
+        public override bool xdrDecodeBoolean()
         {
-            return IPAddress.NetworkToHostOrder(_reader.ReadInt32());
+            return xdrDecodeInt() != 0;
         }
 
-        public override long XdrDecodeLong()
+        public override byte xdrDecodeByte()
         {
-            return IPAddress.NetworkToHostOrder(_reader.ReadInt64());
+            EnsureSpace(4);
+            _position += 3; // Skip padding
+            return _buffer[_position++];
         }
 
-        public override float XdrDecodeFloat()
+        public override short xdrDecodeShort()
         {
-            byte[] bytes = _reader.ReadBytes(4);
-            if (BitConverter.IsLittleEndian)
-                Array.Reverse(bytes);
-            return BitConverter.ToSingle(bytes, 0);
+            return (short)xdrDecodeInt();
         }
 
-        public override double XdrDecodeDouble()
+        public override int xdrDecodeInt()
         {
-            byte[] bytes = _reader.ReadBytes(8);
-            if (BitConverter.IsLittleEndian)
-                Array.Reverse(bytes);
-            return BitConverter.ToDouble(bytes, 0);
+            EnsureSpace(4);
+            int value = (_buffer[_position++] << 24) |
+                       (_buffer[_position++] << 16) |
+                       (_buffer[_position++] << 8) |
+                       _buffer[_position++];
+            return value;
         }
 
-        public override bool XdrDecodeBoolean()
+        public override long xdrDecodeLong()
         {
-            return XdrDecodeInt() != 0;
+            EnsureSpace(8);
+            long value = ((long)_buffer[_position++] << 56) |
+                        ((long)_buffer[_position++] << 48) |
+                        ((long)_buffer[_position++] << 40) |
+                        ((long)_buffer[_position++] << 32) |
+                        ((long)_buffer[_position++] << 24) |
+                        ((long)_buffer[_position++] << 16) |
+                        ((long)_buffer[_position++] << 8) |
+                        _buffer[_position++];
+            return value;
         }
 
-        public override string XdrDecodeString()
+        public override float xdrDecodeFloat()
         {
-            int length = XdrDecodeInt();
-            byte[] bytes = _reader.ReadBytes(length);
-            int padding = (4 - (length % 4)) % 4;
-            _reader.ReadBytes(padding); // Skip padding
-            return Encoding.UTF8.GetString(bytes);
+            int bits = xdrDecodeInt();
+            return BitConverter.ToSingle(BitConverter.GetBytes(bits), 0);
         }
 
-        public override byte[] XdrDecodeOpaque()
+        public override double xdrDecodeDouble()
         {
-            int length = XdrDecodeInt();
-            byte[] bytes = _reader.ReadBytes(length);
-            int padding = (4 - (length % 4)) % 4;
-            _reader.ReadBytes(padding); // Skip padding
-            return bytes;
+            long bits = xdrDecodeLong();
+            return BitConverter.ToDouble(BitConverter.GetBytes(bits), 0);
         }
 
-        public override void Dispose()
+        public override string xdrDecodeString()
         {
-            _reader.Dispose();
-            _buffer.Dispose();
+            int length = xdrDecodeInt();
+            if (length == 0)
+                return string.Empty;
+
+            byte[] bytes = xdrDecodeOpaque();
+            return Encoding.UTF8.GetString(bytes, 0, length);
+        }
+
+        public override byte[] xdrDecodeOpaque()
+        {
+            int length = xdrDecodeInt();
+            if (length == 0)
+                return Array.Empty<byte>();
+
+            EnsureSpace(length);
+            byte[] result = new byte[length];
+            Array.Copy(_buffer, _position, result, 0, length);
+            _position += length;
+
+            // Skip padding
+            int padding = (4 - (length & 3)) & 3;
+            _position += padding;
+
+            return result;
+        }
+
+        public override IPAddress xdrDecodeIPAddress()
+        {
+            byte[] addressBytes = xdrDecodeOpaque();
+            if (addressBytes.Length != 4)
+                throw new InvalidOperationException("Invalid IP address length");
+
+            return new IPAddress(addressBytes);
+        }
+
+        private void EnsureSpace(int needed)
+        {
+            if (_position + needed > _buffer.Length)
+                throw new InvalidOperationException("Buffer underflow");
         }
     }
 } 

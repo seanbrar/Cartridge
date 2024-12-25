@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC.Mount
 {
-    public class MountStatus : XdrAble
+    public class MountStatus : IXdrData
     {
         private NFSMountStats _fhs_status;
         private MountAccessOK _mountinfo;
@@ -49,18 +49,16 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
 
         public NFSMountStats Status
         {
-            get
-            { return this._fhs_status; }
+            get { return this._fhs_status; }
         }
 
         public MountAccessOK MountInfo
         {
-            get
-            { return this._mountinfo; }
+            get { return this._mountinfo; }
         }
     }
 
-    public class MountAccessOK : XdrAble
+    public class MountAccessOK : IXdrData
     {
         private NFSHandle _fhandle;
         private int[] _auth_flavors;

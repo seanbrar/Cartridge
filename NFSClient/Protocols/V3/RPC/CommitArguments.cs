@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class CommitArguments : XdrAble
+    public class CommitArguments : IXdrData
     {
         private NFSHandle _file;
         private long _offset;
@@ -22,42 +22,36 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._file.XdrEncode(xdr);
-            xdr.xdrEncodeLong(this._offset);
-            xdr.xdrEncodeInt(this._count);
+            _file.XdrEncode(xdr);
+            xdr.XdrEncodeLong(_offset);
+            xdr.XdrEncodeInt(_count);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._file = new NFSHandle();
-            this._file.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._file.XdrDecode(xdr);
-            this._offset = xdr.xdrDecodeLong();
-            this._count = xdr.xdrDecodeInt();
+            _file = new NFSHandle();
+            _file.Version = V3.RPC.NFSv3Protocol.NFS_V3;
+            _file.XdrDecode(xdr);
+            _offset = xdr.XdrDecodeLong();
+            _count = xdr.XdrDecodeInt();
         }
 
         public NFSHandle File
         {
-            get
-            { return this._file; }
-            set
-            { this._file = value; }
+            get { return _file; }
+            set { _file = value; }
         }
 
         public long Offset
         {
-            get
-            { return this._offset; }
-            set
-            { this._offset = value; }
+            get { return _offset; }
+            set { _offset = value; }
         }
 
         public int Count
         {
-            get
-            { return this._count; }
-            set
-            { this._count = value; }
+            get { return _count; }
+            set { _count = value; }
         }
     }
     // End of COMMIT3args.cs

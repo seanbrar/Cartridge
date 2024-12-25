@@ -5,7 +5,7 @@ namespace NFSLibrary.RPC
     /// <summary>
     /// Represents a serializable XDR long value.
     /// </summary>
-    public class XdrLong : XdrAble
+    public class XdrLong : IXdrData
     {
         private long value;
 
@@ -26,12 +26,12 @@ namespace NFSLibrary.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.XdrEncodeLong(value);
+            xdr.xdrEncodeLong(value);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            value = xdr.XdrDecodeLong();
+            value = xdr.xdrDecodeLong();
         }
     }
 } 

@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class MakeFileArguments : XdrAble
+    public class MakeFileArguments : IXdrData
     {
         private ItemOperationArguments _where;
         private MakeFileHow _how;
@@ -21,34 +21,30 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._where.XdrEncode(xdr);
-            this._how.XdrEncode(xdr);
+            _where.XdrEncode(xdr);
+            _how.XdrEncode(xdr);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._where = new ItemOperationArguments(xdr);
-            this._how = new MakeFileHow(xdr);
+            _where = new ItemOperationArguments(xdr);
+            _how = new MakeFileHow(xdr);
         }
 
         public ItemOperationArguments Where
         {
-            get
-            { return this._where; }
-            set
-            { this._where = value; }
+            get { return _where; }
+            set { _where = value; }
         }
 
         public MakeFileHow How
         {
-            get
-            { return this._how; }
-            set
-            { this._how = value; }
+            get { return _how; }
+            set { _how = value; }
         }
     }
 
-    public class MakeFileHow : XdrAble
+    public class MakeFileHow : IXdrData
     {
         private MakeFileModes _mode;
         private MakeAttributes _obj_attributes;
@@ -69,58 +65,52 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeInt((int)this._mode);
+            xdr.xdrEncodeInt((int)_mode);
 
-            switch (this._mode)
+            switch (_mode)
             {
                 case MakeFileModes.UNCHECKED:
                 case MakeFileModes.GUARDED:
-                    this._obj_attributes.XdrEncode(xdr);
+                    _obj_attributes.XdrEncode(xdr);
                     break;
                 case MakeFileModes.EXCLUSIVE:
-                    xdr.xdrEncodeOpaque(this._verf, NFSv3Protocol.NFS3_CREATEVERFSIZE);
+                    xdr.xdrEncodeOpaque(_verf, NFSv3Protocol.NFS3_CREATEVERFSIZE);
                     break;
             }
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._mode = (MakeFileModes)xdr.xdrDecodeInt();
+            _mode = (MakeFileModes)xdr.xdrDecodeInt();
 
-            switch (this._mode)
+            switch (_mode)
             {
                 case MakeFileModes.UNCHECKED:
                 case MakeFileModes.GUARDED:
-                    this._obj_attributes = new MakeAttributes(xdr);
+                    _obj_attributes = new MakeAttributes(xdr);
                     break;
                 case MakeFileModes.EXCLUSIVE:
-                    this._verf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_CREATEVERFSIZE);
+                    _verf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_CREATEVERFSIZE);
                     break;
             }
         }
 
         public MakeFileModes Mode
         {
-            get
-            { return this._mode; }
-            set
-            { this._mode = value; }
+            get { return _mode; }
+            set { _mode = value; }
         }
 
         public MakeAttributes Attributes
         {
-            get
-            { return this._obj_attributes; }
-            set
-            { this._obj_attributes = value; }
+            get { return _obj_attributes; }
+            set { _obj_attributes = value; }
         }
 
         public byte[] Verification
         {
-            get
-            { return this._verf; }
-            set
-            { this._verf = value; }
+            get { return _verf; }
+            set { _verf = value; }
         }
     }
     // End of CREATE3args.cs

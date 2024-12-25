@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {
-    public class Name : XdrAble
+    public class Name : IXdrData
     {
         private String _value;
 

@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class MakeNodeArguments : XdrAble
+    public class MakeNodeArguments : IXdrData
     {
         private ItemOperationArguments _where;
         private MakeNodeData _what;
@@ -48,7 +48,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class MakeNodeData : XdrAble
+    public class MakeNodeData : IXdrData
     {
         private NFSItemTypes _type;
         private DeviceData _device_chr;
@@ -149,7 +149,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class DeviceData : XdrAble
+    public class DeviceData : IXdrData
     {
         private MakeAttributes _dev_attributes;
         private SpecInformation _spec;

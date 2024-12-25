@@ -40,7 +40,7 @@ namespace NFSLibrary.RPC.OncRpc
             _socket.Disconnect(true);
         }
 
-        public void Call(int procedure, XdrAble args, XdrAble result)
+        public void Call(int procedure, IXdrData args, IXdrData result)
         {
             // Create RPC call message
             var callInfo = new OncRpcCallInformation
@@ -84,7 +84,7 @@ namespace NFSLibrary.RPC.OncRpc
             callInfo.Parameters.XdrEncode(xdr);
         }
 
-        private void DecodeReplyMessage(XdrDecodingStream xdr, XdrAble result)
+        private void DecodeReplyMessage(XdrDecodingStream xdr, IXdrData result)
         {
             int xid = xdr.XdrDecodeInt();
             int messageType = xdr.XdrDecodeInt();

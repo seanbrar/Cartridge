@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class RenameAccessOK : XdrAble
+    public class RenameAccessOK : IXdrData
     {
         private WritingData _fromdir_wcc;
         private WritingData _todir_wcc;
@@ -21,30 +21,28 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._fromdir_wcc.XdrEncode(xdr);
-            this._todir_wcc.XdrEncode(xdr);
+            _fromdir_wcc.XdrEncode(xdr);
+            _todir_wcc.XdrEncode(xdr);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._fromdir_wcc = new WritingData(xdr);
-            this._todir_wcc = new WritingData(xdr);
+            _fromdir_wcc = new WritingData(xdr);
+            _todir_wcc = new WritingData(xdr);
         }
 
         public WritingData From
         {
-            get
-            { return this._fromdir_wcc; }
+            get { return _fromdir_wcc; }
         }
 
         public WritingData To
         {
-            get
-            { return this._todir_wcc; }
+            get { return _todir_wcc; }
         }
     }
 
-    public class RenameAccessFAIL : XdrAble
+    public class RenameAccessFAIL : IXdrData
     {
         private WritingData _fromdir_wcc;
         private WritingData _todir_wcc;
@@ -57,26 +55,24 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._fromdir_wcc.XdrEncode(xdr);
-            this._todir_wcc.XdrEncode(xdr);
+            _fromdir_wcc.XdrEncode(xdr);
+            _todir_wcc.XdrEncode(xdr);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._fromdir_wcc = new WritingData(xdr);
-            this._todir_wcc = new WritingData(xdr);
+            _fromdir_wcc = new WritingData(xdr);
+            _todir_wcc = new WritingData(xdr);
         }
 
         public WritingData From
         {
-            get
-            { return this._fromdir_wcc; }
+            get { return _fromdir_wcc; }
         }
 
         public WritingData To
         {
-            get
-            { return this._todir_wcc; }
+            get { return _todir_wcc; }
         }
     }
     // End of WRITE3res.cs

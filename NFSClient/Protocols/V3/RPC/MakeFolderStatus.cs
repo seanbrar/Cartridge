@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class MakeFolderAccessOK : XdrAble
+    public class MakeFolderAccessOK : IXdrData
     {
         private bool _handleexists;
         private NFSHandle _handle;
@@ -23,7 +23,7 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeBoolean(this._handleexists);
+            xdr.XdrEncodeBoolean(this._handleexists);
             if (this._handleexists)
             { this._handle.XdrEncode(xdr); }
 
@@ -33,7 +33,7 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._handleexists = xdr.xdrDecodeBoolean();
+            this._handleexists = xdr.XdrDecodeBoolean();
             if (this._handleexists)
             {
                 this._handle = new NFSHandle();
@@ -70,7 +70,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class MakeFolderAccessFAIL : XdrAble
+    public class MakeFolderAccessFAIL : IXdrData
     {
         private WritingData _dir_wcc;
 

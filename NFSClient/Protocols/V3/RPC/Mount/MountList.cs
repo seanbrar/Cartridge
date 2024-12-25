@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC.Mount
 {
-    public class MountList : XdrAble
+    public class MountList : IXdrData
     {
         private MountBody _value;
 

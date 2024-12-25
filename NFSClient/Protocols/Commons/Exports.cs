@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {
-    public class Exports : XdrAble
+    public class Exports : IXdrData
     {
         private ExportNode _value;
 
@@ -42,7 +42,7 @@ namespace NFSLibrary.Protocols.Commons
         }
     }
 
-    public class ExportNode : XdrAble
+    public class ExportNode : IXdrData
     {
         private Name _mountpath;
         private Groups _exgroups;

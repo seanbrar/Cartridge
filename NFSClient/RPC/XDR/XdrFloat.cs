@@ -3,35 +3,35 @@ using NFSLibrary.RPC.XDR;
 namespace NFSLibrary.RPC
 {
     /// <summary>
-    /// Represents a serializable XDR string value.
+    /// Represents a serializable XDR float value.
     /// </summary>
-    public class XdrString : IXdrData
+    public class XdrFloat : IXdrData
     {
-        private string value;
+        private float value;
 
-        public XdrString(string value)
+        public XdrFloat(float value)
         {
             this.value = value;
         }
 
-        public XdrString()
+        public XdrFloat()
         {
-            this.value = string.Empty;
+            this.value = 0;
         }
 
-        public string StringValue()
+        public float FloatValue()
         {
             return this.value;
         }
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeString(value);
+            xdr.xdrEncodeFloat(value);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            value = xdr.xdrDecodeString();
+            value = xdr.xdrDecodeFloat();
         }
     }
-} 
+}

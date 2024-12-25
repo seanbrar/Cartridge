@@ -1,15 +1,18 @@
+using System;
+using NFSLibrary.Protocols.Commons;
+
 namespace NFSLibrary.RPC.XDR
 {
-    public class ResultObject<TOK, TFAIL> : XdrAble where TOK : XdrAble where TFAIL : XdrAble
+    public class ResultObject<TOK, TFAIL> : IXdrData where TOK : IXdrData where TFAIL : IXdrData
     {
-        private NFSLibrary.Protocols.Commons.NFSStats _status;
+        private NFSStats _status;
         private TOK _ok;
         private TFAIL _fail;
 
         public ResultObject()
         { }
 
-        public ResultObject(NFSLibrary.Protocols.Commons.NFSStats status, TOK ok, TFAIL fail)
+        public ResultObject(NFSStats status, TOK ok, TFAIL fail)
         {
             _status = status;
             _ok = ok;
@@ -17,12 +20,14 @@ namespace NFSLibrary.RPC.XDR
         }
 
         public ResultObject(XdrDecodingStream xdr)
-        { XdrDecode(xdr); }
+        {
+            XdrDecode(xdr);
+        }
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.XdrEncodeInt((int)_status);
-            if (_status == NFSLibrary.Protocols.Commons.NFSStats.NFS_OK)
+            xdr.xdrEncodeInt((int)_status);
+            if (_status == NFSStats.NFS_OK)
                 _ok.XdrEncode(xdr);
             else
                 _fail.XdrEncode(xdr);
@@ -30,14 +35,14 @@ namespace NFSLibrary.RPC.XDR
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            _status = (NFSLibrary.Protocols.Commons.NFSStats)xdr.XdrDecodeInt();
-            if (_status == NFSLibrary.Protocols.Commons.NFSStats.NFS_OK)
+            _status = (NFSStats)xdr.xdrDecodeInt();
+            if (_status == NFSStats.NFS_OK)
                 _ok = (TOK)Activator.CreateInstance(typeof(TOK), xdr);
             else
                 _fail = (TFAIL)Activator.CreateInstance(typeof(TFAIL), xdr);
         }
 
-        public NFSLibrary.Protocols.Commons.NFSStats Status
+        public NFSStats Status
         {
             get { return _status; }
         }

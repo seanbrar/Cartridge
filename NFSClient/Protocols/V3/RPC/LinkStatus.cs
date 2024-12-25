@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class LinkAccessOK : XdrAble
+    public class LinkAccessOK : IXdrData
     {
         private PostOperationAttributes _file_attributes;
         private WritingData _linkdir_wcc;
@@ -44,7 +44,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class LinkAccessFAIL : XdrAble
+    public class LinkAccessFAIL : IXdrData
     {
         private PostOperationAttributes _file_attributes;
         private WritingData _linkdir_wcc;

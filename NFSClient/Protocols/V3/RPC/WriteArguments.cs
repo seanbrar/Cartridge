@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class WriteArguments : XdrAble
+    public class WriteArguments : IXdrData
     {
         private NFSHandle _file;
         private long _offset;
@@ -24,22 +24,22 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._file.XdrEncode(xdr);
-            xdr.XdrEncodeLong(this._offset);
-            xdr.XdrEncodeInt(this._count);
-            xdr.XdrEncodeInt((int)this._stable);
-            xdr.XdrEncodeDynamicOpaque(this._data);
+            _file.XdrEncode(xdr);
+            xdr.XdrEncodeLong(_offset);
+            xdr.XdrEncodeInt(_count);
+            xdr.XdrEncodeInt((int)_stable);
+            xdr.XdrEncodeDynamicOpaque(_data);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._file = new NFSHandle();
-            this._file.Version = V3.RPC.NFSv3Protocol.NFS_V3;
-            this._file.XdrDecode(xdr);
-            this._offset = xdr.XdrDecodeLong();
-            this._count = xdr.XdrDecodeInt();
-            this._stable = (StableHow)xdr.XdrDecodeInt();
-            this._data = xdr.XdrDecodeDynamicOpaque();
+            _file = new NFSHandle();
+            _file.Version = V3.RPC.NFSv3Protocol.NFS_V3;
+            _file.XdrDecode(xdr);
+            _offset = xdr.XdrDecodeLong();
+            _count = xdr.XdrDecodeInt();
+            _stable = (StableHow)xdr.XdrDecodeInt();
+            _data = xdr.XdrDecodeDynamicOpaque();
         }
 
         public NFSHandle File

@@ -15,7 +15,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         FILE_SYNC = 2
     }
 
-    public class WriteAccessOK : XdrAble
+    public class WriteAccessOK : IXdrData
     {
         private WritingData _file_wcc;
         private int _count;
@@ -69,7 +69,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class WriteAccessFAIL : XdrAble
+    public class WriteAccessFAIL : IXdrData
     {
         private WritingData _dir_wcc;
 

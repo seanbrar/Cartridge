@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class PostOperationAttributes : XdrAble
+    public class PostOperationAttributes : IXdrData
     {
         private bool _attributes_follow;
         private FileAttributes _attributes;
@@ -16,17 +16,17 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public PostOperationAttributes(XdrDecodingStream xdr)
-        { XdrDecode(xdr); }
+        { xdrDecode(xdr); }
 
-        public void XdrEncode(XdrEncodingStream xdr)
+        public void xdrEncode(XdrEncodingStream xdr)
         {
             xdr.xdrEncodeBoolean(this._attributes_follow);
 
             if (this._attributes_follow)
-            { this._attributes.XdrEncode(xdr); }
+            { this._attributes.xdrEncode(xdr); }
         }
 
-        public void XdrDecode(XdrDecodingStream xdr)
+        public void xdrDecode(XdrDecodingStream xdr)
         {
             this._attributes_follow = xdr.xdrDecodeBoolean();
 

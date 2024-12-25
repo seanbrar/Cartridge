@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class RenameArguments : XdrAble
+    public class RenameArguments : IXdrData
     {
         private ItemOperationArguments _from;
         private ItemOperationArguments _to;
@@ -16,15 +16,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public RenameArguments(XdrDecodingStream xdr)
-        { XdrDecode(xdr); }
+        { xdrDecode(xdr); }
 
-        public void XdrEncode(XdrEncodingStream xdr)
+        public void xdrEncode(XdrEncodingStream xdr)
         {
-            this._from.XdrEncode(xdr);
-            this._to.XdrEncode(xdr);
+            this._from.xdrEncode(xdr);
+            this._to.xdrEncode(xdr);
         }
 
-        public void XdrDecode(XdrDecodingStream xdr)
+        public void xdrDecode(XdrDecodingStream xdr)
         {
             this._from = new ItemOperationArguments(xdr);
             this._to = new ItemOperationArguments(xdr);

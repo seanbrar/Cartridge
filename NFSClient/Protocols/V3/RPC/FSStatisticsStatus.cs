@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class FSStatisticsAccessOK : XdrAble
+    public class FSStatisticsAccessOK : IXdrData
     {
         private PostOperationAttributes _obj_attributes;
         private long _tbytes;
@@ -98,7 +98,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class FSStatisticsAccessFAIL : XdrAble
+    public class FSStatisticsAccessFAIL : IXdrData
     {
         private PostOperationAttributes obj_attributes;
 

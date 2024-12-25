@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class AccessAccessOK : XdrAble
+    public class AccessAccessOK : IXdrData
     {
         private PostOperationAttributes _obj_attributes;
         private int _access;
@@ -22,13 +22,13 @@ namespace NFSLibrary.Protocols.V3.RPC
         public void XdrEncode(XdrEncodingStream xdr)
         {
             this._obj_attributes.XdrEncode(xdr);
-            xdr.xdrEncodeInt(this._access);
+            xdr.XdrEncodeInt(this._access);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
             this._obj_attributes = new PostOperationAttributes(xdr);
-            this._access = xdr.xdrDecodeInt();
+            this._access = xdr.XdrDecodeInt();
         }
 
         public PostOperationAttributes Attributes
@@ -38,7 +38,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class AccessAccessFAIL : XdrAble
+    public class AccessAccessFAIL : IXdrData
     {
         private PostOperationAttributes _obj_attributes;
 

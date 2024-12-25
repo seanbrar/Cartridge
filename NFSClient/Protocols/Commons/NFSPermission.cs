@@ -35,6 +35,20 @@ namespace NFSLibrary.Protocols.Commons
         }
 
         /// <summary>
+        /// Creates a new NFSPermission instance with separate user, group, and other permissions.
+        /// </summary>
+        /// <param name="user">User (owner) permissions (0-7)</param>
+        /// <param name="group">Group permissions (0-7)</param>
+        /// <param name="other">Other permissions (0-7)</param>
+        public NFSPermission(int user, int group, int other)
+        {
+            user &= 0x7;
+            group &= 0x7;
+            other &= 0x7;
+            Mode = (user << 6) | (group << 3) | other;
+        }
+
+        /// <summary>
         /// Creates a new NFSPermission instance from string representation (e.g., "rwxr-xr--").
         /// </summary>
         /// <param name="permissions">The permission string in rwx format.</param>

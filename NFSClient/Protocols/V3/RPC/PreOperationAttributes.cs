@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class PreOperationAttributes : XdrAble
+    public class PreOperationAttributes : IXdrData
     {
         private bool _attributes_follow;
         private WritingAttributes _attributes;

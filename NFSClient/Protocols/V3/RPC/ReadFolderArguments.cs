@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class ReadFolderArguments : XdrAble
+    public class ReadFolderArguments : IXdrData
     {
         private NFSHandle _item;
         private NFSCookie _cookie;

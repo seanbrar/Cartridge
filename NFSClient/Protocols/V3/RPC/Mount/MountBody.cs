@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC.Mount
 {
-    public class MountBody : XdrAble
+    public class MountBody : IXdrData
     {
         private Name _hostname;
         private Name _directory;
@@ -22,34 +22,31 @@ namespace NFSLibrary.Protocols.V3.RPC.Mount
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            this._hostname.XdrEncode(xdr);
-            this._directory.XdrEncode(xdr);
-            this._nextentry.XdrEncode(xdr);
+            _hostname.XdrEncode(xdr);
+            _directory.XdrEncode(xdr);
+            _nextentry.XdrEncode(xdr);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._hostname = new Name(xdr);
-            this._directory = new Name(xdr);
-            this._nextentry = new MountList(xdr);
+            _hostname = new Name(xdr);
+            _directory = new Name(xdr);
+            _nextentry = new MountList(xdr);
         }
 
         public Name HostName
         {
-            get
-            { return this._hostname; }
+            get { return _hostname; }
         }
 
         public Name Directory
         {
-            get
-            { return this._directory; }
+            get { return _directory; }
         }
 
         public MountList NextEntry
         {
-            get
-            { return this._nextentry; }
+            get { return _nextentry; }
         }
     }
     // End of mountbody3.cs

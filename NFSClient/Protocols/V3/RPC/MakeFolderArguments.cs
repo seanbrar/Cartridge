@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class MakeFolderArguments : XdrAble
+    public class MakeFolderArguments : IXdrData
     {
         private ItemOperationArguments _where;
         private MakeAttributes _attributes;
@@ -16,15 +16,15 @@ namespace NFSLibrary.Protocols.V3.RPC
         { }
 
         public MakeFolderArguments(XdrDecodingStream xdr)
-        { XdrDecode(xdr); }
+        { xdrDecode(xdr); }
 
-        public void XdrEncode(XdrEncodingStream xdr)
+        public void xdrEncode(XdrEncodingStream xdr)
         {
-            this._where.XdrEncode(xdr);
-            this._attributes.XdrEncode(xdr);
+            this._where.xdrEncode(xdr);
+            this._attributes.xdrEncode(xdr);
         }
 
-        public void XdrDecode(XdrDecodingStream xdr)
+        public void xdrDecode(XdrDecodingStream xdr)
         {
             this._where = new ItemOperationArguments(xdr);
             this._attributes = new MakeAttributes(xdr);

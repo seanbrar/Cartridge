@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class GetAttributeArguments : XdrAble
+    public class GetAttributeArguments : IXdrData
     {
         private NFSHandle _handle;
 

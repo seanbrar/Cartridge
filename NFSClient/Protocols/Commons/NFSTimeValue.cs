@@ -7,7 +7,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.Commons
 {
-    public class NFSTimeValue : XdrAble
+    public class NFSTimeValue : IXdrData
     {
         private int _seconds;
         private int _useconds;

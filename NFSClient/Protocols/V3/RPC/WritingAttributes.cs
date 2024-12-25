@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class WritingAttributes : XdrAble
+    public class WritingAttributes : IXdrData
     {
         private long _size;
         private NFSTimeValue _mtime;
@@ -22,14 +22,14 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeLong(this._size);
+            xdr.XdrEncodeLong(this._size);
             this._mtime.XdrEncode(xdr);
             this._ctime.XdrEncode(xdr);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._size = xdr.xdrDecodeLong();
+            this._size = xdr.XdrDecodeLong();
             this._mtime = new NFSTimeValue(xdr);
             this._ctime = new NFSTimeValue(xdr);
         }

@@ -15,7 +15,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         SET_TO_CLIENT_TIME = 2
     }
 
-    public class MakeAttributes : XdrAble
+    public class MakeAttributes : IXdrData
     {
         private NFSPermission _mode;
         private bool _setmode;
@@ -50,56 +50,56 @@ namespace NFSLibrary.Protocols.V3.RPC
 
         public void XdrEncode(XdrEncodingStream xdr)
         {
-            xdr.xdrEncodeBoolean(this._setmode);
+            xdr.XdrEncodeBoolean(this._setmode);
             if (this._setmode)
-            { xdr.xdrEncodeInt(this._mode.Mode); }
+            { xdr.XdrEncodeInt(this._mode.Mode); }
 
-            xdr.xdrEncodeBoolean(this._setuid);
+            xdr.XdrEncodeBoolean(this._setuid);
             if (this._setuid)
-            { xdr.xdrEncodeInt(this._uid); }
+            { xdr.XdrEncodeInt(this._uid); }
 
-            xdr.xdrEncodeBoolean(this._setgid);
+            xdr.XdrEncodeBoolean(this._setgid);
             if (this._setgid)
-            { xdr.xdrEncodeInt(this._gid); }
+            { xdr.XdrEncodeInt(this._gid); }
 
-            xdr.xdrEncodeBoolean(this._setsize);
+            xdr.XdrEncodeBoolean(this._setsize);
             if (this._setsize)
-            { xdr.xdrEncodeLong(this._size); }
+            { xdr.XdrEncodeLong(this._size); }
 
-            xdr.xdrEncodeBoolean(this._setatime != TimeHow.DONT_CHANGE);
+            xdr.XdrEncodeBoolean(this._setatime != TimeHow.DONT_CHANGE);
             if (this._setatime != TimeHow.DONT_CHANGE)
             { this._atime.XdrEncode(xdr); }
 
-            xdr.xdrEncodeBoolean(this._setmtime != TimeHow.DONT_CHANGE);
+            xdr.XdrEncodeBoolean(this._setmtime != TimeHow.DONT_CHANGE);
             if (this._setmtime != TimeHow.DONT_CHANGE)
             { this._mtime.XdrEncode(xdr); }
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._setmode = xdr.xdrDecodeBoolean();
+            this._setmode = xdr.XdrDecodeBoolean();
             if (this._setmode)
-            { this._mode.Mode = xdr.xdrDecodeInt(); }
+            { this._mode.Mode = xdr.XdrDecodeInt(); }
 
-            this._setuid = xdr.xdrDecodeBoolean();
+            this._setuid = xdr.XdrDecodeBoolean();
             if (this._setuid)
-            { this._uid = xdr.xdrDecodeInt(); }
+            { this._uid = xdr.XdrDecodeInt(); }
 
-            this._setgid = xdr.xdrDecodeBoolean();
+            this._setgid = xdr.XdrDecodeBoolean();
             if (this._setgid)
-            { this._gid = xdr.xdrDecodeInt(); }
+            { this._gid = xdr.XdrDecodeInt(); }
 
-            this._setsize = xdr.xdrDecodeBoolean();
+            this._setsize = xdr.XdrDecodeBoolean();
             if (this._setsize)
-            { this._size = xdr.xdrDecodeInt(); }
+            { this._size = xdr.XdrDecodeInt(); }
 
-            this._setatime = (xdr.xdrDecodeBoolean() ? TimeHow.SET_TO_CLIENT_TIME : TimeHow.DONT_CHANGE);
+            this._setatime = (xdr.XdrDecodeBoolean() ? TimeHow.SET_TO_CLIENT_TIME : TimeHow.DONT_CHANGE);
             if (this._setatime != TimeHow.DONT_CHANGE)
             { this._atime = new NFSTimeValue(xdr); }
 
-            this._setmtime = (xdr.xdrDecodeBoolean() ? TimeHow.SET_TO_CLIENT_TIME : TimeHow.DONT_CHANGE);
+            this._setmtime = (xdr.XdrDecodeBoolean() ? TimeHow.SET_TO_CLIENT_TIME : TimeHow.DONT_CHANGE);
             if (this._setmtime != TimeHow.DONT_CHANGE)
-            { this._mtime = new NFSTimeValue(xdr); }   
+            { this._mtime = new NFSTimeValue(xdr); }
         }
 
         public NFSPermission Mode

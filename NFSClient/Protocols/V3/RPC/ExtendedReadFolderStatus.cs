@@ -8,7 +8,7 @@ using NFSLibrary.RPC.XDR;
 
 namespace NFSLibrary.Protocols.V3.RPC
 {
-    public class ExtendedReadFolderAccessOK : XdrAble
+    public class ExtendedReadFolderAccessOK : IXdrData
     {
         private PostOperationAttributes _dir_attributes;
         private byte[] _cookieverf;
@@ -23,14 +23,14 @@ namespace NFSLibrary.Protocols.V3.RPC
         public void XdrEncode(XdrEncodingStream xdr)
         {
             this._dir_attributes.XdrEncode(xdr);
-            xdr.xdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
+            xdr.XdrEncodeOpaque(this._cookieverf, NFSv3Protocol.NFS3_COOKIEVERFSIZE);
             this._reply.XdrEncode(xdr);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
             this._dir_attributes = new PostOperationAttributes(xdr);
-            this._cookieverf = xdr.xdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
+            this._cookieverf = xdr.XdrDecodeOpaque(NFSv3Protocol.NFS3_COOKIEVERFSIZE);
             this._reply = new FolderList(xdr);
         }
 
@@ -53,7 +53,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class ExtendedReadFolderAccessFAIL : XdrAble
+    public class ExtendedReadFolderAccessFAIL : IXdrData
     {
         private PostOperationAttributes _dir_attributes;
 
@@ -76,7 +76,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class FolderList : XdrAble
+    public class FolderList : IXdrData
     {
         private FolderEntry _entries;
         private bool _eof;
@@ -91,18 +91,18 @@ namespace NFSLibrary.Protocols.V3.RPC
         {
             if (this._entries != null)
             {
-                xdr.xdrEncodeBoolean(true);
+                xdr.XdrEncodeBoolean(true);
                 this._entries.XdrEncode(xdr);
             }
-            else { xdr.xdrEncodeBoolean(false); };
+            else { xdr.XdrEncodeBoolean(false); }
 
-            xdr.xdrEncodeBoolean(this._eof);
+            xdr.XdrEncodeBoolean(this._eof);
         }
 
         public void XdrDecode(XdrDecodingStream xdr)
         {
-            this._entries = xdr.xdrDecodeBoolean() ? new FolderEntry(xdr) : null;
-            this._eof = xdr.xdrDecodeBoolean();
+            this._entries = xdr.XdrDecodeBoolean() ? new FolderEntry(xdr) : null;
+            this._eof = xdr.XdrDecodeBoolean();
         }
 
         public FolderEntry Entries
@@ -118,7 +118,7 @@ namespace NFSLibrary.Protocols.V3.RPC
         }
     }
 
-    public class FolderEntry : XdrAble
+    public class FolderEntry : IXdrData
     {
         private long _fileid;
         private Name _name;
@@ -139,13 +139,13 @@ namespace NFSLibrary.Protocols.V3.RPC
 
             do
             {
-                xdr.xdrEncodeLong(_this._fileid);
+                xdr.XdrEncodeLong(_this._fileid);
                 _this._name.XdrEncode(xdr);
                 _this._cookie.XdrEncode(xdr);
                 _this._name_attributes.XdrEncode(xdr);
                 _this._name_handle.XdrEncode(xdr);
                 _this = _this._nextentry;
-                xdr.xdrEncodeBoolean(_this != null);
+                xdr.XdrEncodeBoolean(_this != null);
             } while (_this != null);
         }
 
