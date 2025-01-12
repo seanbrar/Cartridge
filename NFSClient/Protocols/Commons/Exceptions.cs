@@ -8,7 +8,7 @@
  */
 using System;
 
-namespace NFSLibrary.Protocols.Commons.Exceptions
+namespace Cartridge.Protocol.Exceptions
 {
     public class ExceptionHelpers
     {

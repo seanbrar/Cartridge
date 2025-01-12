@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
-using NFSLibrary.Protocols.Commons;
+using Cartridge.Protocol.Types;
 
-namespace NFSLibrary.Protocols.V3
+namespace Cartridge.Protocol.Operations
 {
     /// <summary>
     /// Provides compatibility with legacy NFS client code while using the new implementation.

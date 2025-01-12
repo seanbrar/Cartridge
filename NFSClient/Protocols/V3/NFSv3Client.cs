@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Logging;
-using NFSLibrary.Protocols.Commons;
-using NFSLibrary.RPC;
+using Cartridge.Protocol.Types;
+using Cartridge.Protocol.Rpc;
 
-namespace NFSLibrary.Protocols.V3
+namespace Cartridge.Protocol.Operations
 {
     /// <summary>
     /// Implementation of NFSv3 client operations.

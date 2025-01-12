@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace NFSClient
+namespace Cartridge
 {
     public partial class Rewrite : Form
     {

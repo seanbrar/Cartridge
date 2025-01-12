@@ -4,9 +4,9 @@
  * See http://remotetea.sourceforge.net for details
  */
 using System;
-using NFSClient.RPC.XDR;
+using Cartridge.RPC.XDR;
 
-namespace NFSLibrary.Protocols.Commons
+namespace Cartridge.Protocol.Types
 {
     public class Name : IXdrData
     {

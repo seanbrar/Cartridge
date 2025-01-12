@@ -3,14 +3,13 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using NFSLibrary.Protocols.Commons;
-using NFSLibrary.RPC.XDR;
-using NFSLibrary.RPC.OncRpc;
+using Cartridge.Protocol.Types;
+using Cartridge.Protocol.Rpc;
 using System.Net;
 
 /**
  */
-namespace NFSLibrary.Protocols.V3.RPC.Mount
+namespace Cartridge.Protocol.Operations.Mount
 {
     public abstract class NFSv3MountProtocolServerStub : OncRpcServerStub, OncRpcDispatchable
     {

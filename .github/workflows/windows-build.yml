@@ -30,7 +30,7 @@ jobs:
     - name: Create Release Package
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
-        dotnet publish NFSClient/NFSClient.csproj -c Release -r win-x64 --self-contained true
+        dotnet publish NFSClient/Cartridge.csproj -c Release -r win-x64 --self-contained true
       
     - name: Upload Build Artifact
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'

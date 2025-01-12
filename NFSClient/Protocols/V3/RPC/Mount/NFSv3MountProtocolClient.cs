@@ -3,9 +3,8 @@
  * jrpcgen is part of the "Remote Tea.Net" ONC/RPC package for C#
  * See http://remotetea.sourceforge.net for details
  */
-using NFSLibrary.Protocols.Commons;
-using NFSLibrary.RPC.XDR;
-using NFSLibrary.RPC.OncRpc;
+using Cartridge.Protocol.Types;
+using Cartridge.Protocol.Rpc;
 using System.Net;
 
 /**
@@ -13,7 +12,7 @@ using System.Net;
  * for the MOUNT_PROGRAM remote program. It provides method stubs
  * which, when called, in turn call the appropriate remote method (procedure).
  */
-namespace NFSLibrary.Protocols.V3.RPC.Mount
+namespace Cartridge.Protocol.Operations.Mount
 {
     /// <summary>
     /// Client implementation for the MOUNT_PROGRAM remote program.

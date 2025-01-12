@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace NFSClient.RPC.XDR
+namespace Cartridge.Protocol.Rpc
 {
     public abstract class XdrEncodingStream : IDisposable
     {

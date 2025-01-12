@@ -1,6 +1,6 @@
-using NFSClient.RPC.XDR;
+using Cartridge.Protocol.Rpc;
 
-namespace NFSClient.RPC.XDR
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Represents a void XDR value, used for procedures that don't take parameters or return values.

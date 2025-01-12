@@ -1,4 +1,4 @@
-namespace NFSLibrary.Protocols.Commons
+namespace Cartridge.Protocol.Types
 {
     /// <summary>
     /// Represents the different types of items in an NFS filesystem.

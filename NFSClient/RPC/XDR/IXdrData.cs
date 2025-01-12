@@ -1,4 +1,4 @@
-namespace NFSClient.RPC.XDR
+namespace Cartridge.Protocol.Rpc
 {
     public interface IXdrData
     {

@@ -2,9 +2,9 @@ using System.IO.Pipes;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.Threading;
 using StreamJsonRpc;
-using NFSLibrary.Protocols.Commons;
+using Cartridge.Protocol.Types;
 
-namespace NFSLibrary.RPC
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Modern RPC client implementation for NFS operations.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 
-namespace NFSLibrary.Protocols.Commons
+namespace Cartridge.Protocol.Types
 {
     public interface INFS
     {

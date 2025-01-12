@@ -5,15 +5,11 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NFSLibrary.RPC.XDR;
-using NFSLibrary.RPC.OncRpc;
-using NFSLibrary.Protocols.Commons;
-using NFSLibrary.Protocols.V3.RPC;
-using NFSLibrary.Protocols.V3.RPC.Mount;
-using NFSLibrary.Protocols.Commons.Exceptions;
-using NFSLibrary.Protocols.Commons.Exceptions.Mount;
+using Cartridge.Protocol.Types;
+using Cartridge.Protocol.Operations;
+using Cartridge.Protocol.Rpc;
 
-namespace NFSLibrary.Protocols.V3
+namespace Cartridge.Protocol.Operations
 {
     public class NFSv3 : INFS
     {

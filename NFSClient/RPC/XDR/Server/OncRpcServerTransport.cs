@@ -1,7 +1,7 @@
 using System.Net;
-using NFSLibrary.RPC.OncRpc;
+using Cartridge.Protocol.Rpc;
 
-namespace NFSLibrary.RPC.XDR.Server
+namespace Cartridge.Protocol.Rpc
 {
     public class OncRpcServerTransportRegistrationInfo
     {

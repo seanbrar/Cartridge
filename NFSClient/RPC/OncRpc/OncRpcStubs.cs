@@ -1,7 +1,7 @@
-using NFSClient.RPC.XDR;
+using Cartridge.Protocol.Rpc;
 using System.Net;
 
-namespace NFSLibrary.RPC.OncRpc
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Base class for ONC/RPC client stubs.

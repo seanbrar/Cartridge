@@ -2,7 +2,8 @@ using System;
 using System.IO;
 using System.Collections;
 
-namespace Dokan
+using Dokan;
+namespace Cartridge.FileSystem.Dokan
 {
     public class DokanFileInfo
     {

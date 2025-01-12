@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NFSClient.Properties {
+namespace Cartridge.Properties {
     using System;
     
     

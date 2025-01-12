@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Dokan
+using Dokan;
+namespace Cartridge.FileSystem.Dokan
 {
     public class DokanOptions
     {

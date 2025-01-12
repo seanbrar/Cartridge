@@ -1,6 +1,6 @@
-using NFSLibrary.Protocols.Commons;
+using Cartridge.Protocol.Types;
 
-namespace NFSLibrary.RPC
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Defines the contract for NFS RPC operations.

@@ -1,6 +1,6 @@
-using NFSLibrary.Protocols.Commons;
+using Cartridge.Protocol.Types;
 
-namespace NFSLibrary.Protocols.V3
+namespace Cartridge.Protocol.Operations
 {
     /// <summary>
     /// Interface for NFSv3 client operations.

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace NFSLibrary.Protocols.Commons
+namespace Cartridge.Protocol.Types
 {
     public class NFSAttributes
     {

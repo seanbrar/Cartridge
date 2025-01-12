@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using NFSLibrary;
 using System.Net;
 using System.Threading;
 using System.Net.NetworkInformation;
@@ -16,7 +15,7 @@ using Dokan;
 using System.Diagnostics;
 
 
-namespace NFSClient
+namespace Cartridge
 {
     public partial class MainForm : Form
     {
@@ -24,7 +23,7 @@ namespace NFSClient
 
         #region Fields
         public bool connected = false;
-        NFSLibrary.NFSClient nfsClient;
+        NFSClient nfsClient;
         List<string> nfsDevs = null;
         DragDropEffects CurrentEffect;
         List<ListViewItem> lvDragItem = new List<ListViewItem>();
@@ -864,7 +863,7 @@ namespace NFSClient
             }
         }
 
-        void nfsClient_DataEvent(object sender, NFSLibrary.NFSClient.NFSEventArgs e)
+        void nfsClient_DataEvent(object sender, NFSClient.NFSEventArgs e)
         {
             TotalTransferredBytes += e.Bytes;
             UpdateProgress(CurrentItem, CurrentSize, e.Bytes);

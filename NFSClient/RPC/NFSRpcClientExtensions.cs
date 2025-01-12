@@ -1,6 +1,6 @@
 using StreamJsonRpc;
 
-namespace NFSLibrary.RPC
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Extension methods for INFSRpcClient to support additional RPC operations.

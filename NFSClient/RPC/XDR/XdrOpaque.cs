@@ -1,6 +1,6 @@
-using NFSClient.RPC.XDR;
+using Cartridge.Protocol.Rpc;
 
-namespace NFSClient.RPC.XDR
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Represents a serializable XDR opaque value.

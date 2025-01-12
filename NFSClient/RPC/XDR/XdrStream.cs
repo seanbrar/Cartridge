@@ -1,4 +1,4 @@
-namespace NFSLibrary.RPC.XDR
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Base class for XDR encoding streams.

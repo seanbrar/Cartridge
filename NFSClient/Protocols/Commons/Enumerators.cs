@@ -6,7 +6,7 @@
 /**
  * Enumeration (collection of constants).
  */
-namespace NFSLibrary.Protocols.Commons
+namespace Cartridge.Protocol.Types
 {
     public enum NFSStats
     {

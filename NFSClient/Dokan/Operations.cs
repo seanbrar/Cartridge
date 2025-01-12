@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 using System.IO;
-using NFSLibrary;
+using Cartridge;
 
-namespace Dokan
+using Dokan;
+namespace Cartridge.FileSystem.Dokan
 {
     class Operations: DokanOperations
     {

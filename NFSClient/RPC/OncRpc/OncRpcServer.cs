@@ -1,8 +1,8 @@
-using NFSLibrary.RPC.XDR;
+using Cartridge.Protocol.Rpc;
 using System.Net;
 using System.Net.Sockets;
 
-namespace NFSLibrary.RPC.OncRpc
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Base class for ONC/RPC server implementations.

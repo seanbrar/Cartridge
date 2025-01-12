@@ -1,6 +1,6 @@
-using NFSClient.RPC.XDR;
+using Cartridge.Protocol.Rpc;
 
-namespace NFSLibrary.RPC.OncRpc
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Interface for NFS RPC client operations.

@@ -1,4 +1,4 @@
-namespace NFSLibrary.Protocols.Commons
+namespace Cartridge.Protocol.Types
 {
     /// <summary>
     /// Represents Unix-style file permissions for NFS operations.

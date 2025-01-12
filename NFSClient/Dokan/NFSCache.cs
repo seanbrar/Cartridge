@@ -4,7 +4,8 @@ using System.Text;
 using System.Collections;
 using System.IO;
 
-namespace Dokan
+using Dokan;
+namespace Cartridge.FileSystem.Dokan
 {
     class CacheEntry
     {

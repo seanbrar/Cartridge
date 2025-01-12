@@ -1,9 +1,10 @@
 using Microsoft.Extensions.Logging;
-using NFSLibrary.Protocols.Commons;
-using NFSLibrary.Protocols.V3;
+using Cartridge.Protocol.Types;
+using Cartridge.Protocol.Operations;
 using System.Collections.Concurrent;
 
-namespace NFSLibrary
+using Dokan;
+namespace Cartridge.FileSystem.Dokan
 {
     /// <summary>
     /// Bridge class to adapt the modern NFSv3Client to work with legacy Dokan code.

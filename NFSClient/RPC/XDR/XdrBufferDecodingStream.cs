@@ -2,7 +2,7 @@ using System;
 using System.Net;
 using System.Text;
 
-namespace NFSClient.RPC.XDR
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Implements XDR decoding from a memory buffer.

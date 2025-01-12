@@ -1,4 +1,4 @@
-﻿namespace NFSClient
+﻿namespace Cartridge
 {
     partial class AddServer
     {

@@ -1,4 +1,4 @@
-namespace NFSClient.RPC.XDR
+namespace Cartridge.Protocol.Rpc
 {
     /// <summary>
     /// Represents a serializable XDR integer value.

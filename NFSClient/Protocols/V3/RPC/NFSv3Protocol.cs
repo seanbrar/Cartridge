@@ -6,7 +6,7 @@
 /**
  * A collection of constants used by the "NFSv3Protocol" ONC/RPC program.
  */
-namespace NFSLibrary.Protocols.V3.RPC
+namespace Cartridge.Protocol.Operations
 {
     public class NFSv3Protocol
     {

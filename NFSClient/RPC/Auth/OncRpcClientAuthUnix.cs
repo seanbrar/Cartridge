@@ -1,7 +1,7 @@
 using System.Net;
-using NFSClient.RPC.XDR;
+using Cartridge.Protocol.Rpc;
 
-namespace NFSLibrary.RPC.Auth
+namespace Cartridge.Protocol.Rpc
 {
     public class OncRpcClientAuthUnix : IXdrData
     {

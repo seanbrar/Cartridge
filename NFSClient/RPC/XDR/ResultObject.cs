@@ -1,7 +1,7 @@
 using System;
-using NFSLibrary.Protocols.Commons;
+using Cartridge.Protocol.Types;
 
-namespace NFSLibrary.RPC.XDR
+namespace Cartridge.Protocol.Rpc
 {
     public class ResultObject<TOK, TFAIL> : IXdrData where TOK : IXdrData where TFAIL : IXdrData
     {

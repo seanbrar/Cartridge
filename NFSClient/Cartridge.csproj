@@ -4,17 +4,24 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Cartridge</RootNamespace>
+    <AssemblyName>Cartridge</AssemblyName>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Platforms>x64</Platforms>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <ApplicationIcon>Resources\NFS_Linux.ico</ApplicationIcon>
+
+    <!-- Package Metadata -->
+    <Version>0.1.0-alpha</Version>
+    <Authors>$(Company)</Authors>
     <Company>Cartridge Project</Company>
     <Product>Cartridge</Product>
     <Description>Modern, focused NFS client for Windows, optimized for retro gaming scenarios</Description>
     <Copyright>Copyright © 2024</Copyright>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+
+    <!-- Build Configuration -->
     <LangVersion>latest</LangVersion>
     <AnalysisMode>Recommended</AnalysisMode>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -28,15 +35,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
     <PackageReference Include="StreamJsonRpc" Version="2.17.8" />
     <PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.8.14" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Protocols\V2\**" />
-    <Compile Remove="Protocols\V4\**" />
-    <EmbeddedResource Remove="Protocols\V2\**" />
-    <EmbeddedResource Remove="Protocols\V4\**" />
-    <None Remove="Protocols\V2\**" />
-    <None Remove="Protocols\V4\**" />
   </ItemGroup>
 
   <ItemGroup>

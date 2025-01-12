@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using NFSLibrary.Protocols;
-using NFSLibrary.Protocols.Commons;
-using NFSLibrary.Protocols.V3;
+using Cartridge.Protocol.Operations;
+using Cartridge.Protocol.Types;
 using System.Runtime.InteropServices;
 using System.Net;
 
-namespace NFSLibrary
+namespace Cartridge
 {
     /// <summary>
     /// NFS Client Library

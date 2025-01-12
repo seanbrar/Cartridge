@@ -7,7 +7,8 @@ using System.Runtime.InteropServices;
 
 using ComTypes = System.Runtime.InteropServices.ComTypes;
 
-namespace Dokan
+using Dokan;
+namespace Cartridge.FileSystem.Dokan
 {
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     struct BY_HANDLE_FILE_INFORMATION
