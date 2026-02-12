@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>Cartridge</RootNamespace>
+    <AssemblyName>Cartridge</AssemblyName>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>x64</Platforms>
+    <ApplicationIcon>NFS_Linux.ico</ApplicationIcon>
+
+    <!-- Package Metadata -->
+    <Version>0.1.0-alpha</Version>
+    <Authors>$(Company)</Authors>
+    <Company>Cartridge Project</Company>
+    <Product>Cartridge</Product>
+    <Description>Modern, focused NFS client for Windows, optimized for retro gaming scenarios</Description>
+    <Copyright>Copyright © 2024</Copyright>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+
+    <!-- Build Configuration -->
+    <LangVersion>latest</LangVersion>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <PackageReference Include="StreamJsonRpc" Version="2.17.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.8.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Cartridge.Core\Cartridge.Core.csproj" />
+  </ItemGroup>
+
+  <!-- Exclude subprojects from auto-compilation (they have their own csproj files) -->
+  <ItemGroup>
+    <Compile Remove="Cartridge.Core\**\*.cs" />
+    <Compile Remove="Cartridge.Tests\**\*.cs" />
+  </ItemGroup>
+
+  <!-- Override App.xaml as ApplicationDefinition (SDK defaults to Page) -->
+  <ItemGroup>
+    <Page Remove="Cartridge.UI\App.xaml" />
+    <ApplicationDefinition Include="Cartridge.UI\App.xaml" />
+  </ItemGroup>
+
+</Project>

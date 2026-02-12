@@ -1,0 +1,14 @@
+<Application x:Class="Cartridge.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- Your application icon -->
+        <DrawingImage x:Key="AppIcon">
+            <DrawingImage.Drawing>
+                <ImageDrawing ImageSource="/Resources/NFS_Linux.ico" 
+                             Rect="0,0,16,16"/>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+    </Application.Resources>
+</Application>

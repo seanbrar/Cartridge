@@ -2,7 +2,9 @@
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.0.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cartridge", "NFSClient\Cartridge.csproj", "{090C08C3-CC29-4983-8CC2-C47542A5E61A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cartridge", "src\Cartridge.csproj", "{090C08C3-CC29-4983-8CC2-C47542A5E61A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cartridge.Core", "src\Cartridge.Core\Cartridge.Core.csproj", "{5B42C0D4-F23B-4B95-9FD6-A5F752E3B5E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{090C08C3-CC29-4983-8CC2-C47542A5E61A}.Debug|x64.Build.0 = Debug|x64
 		{090C08C3-CC29-4983-8CC2-C47542A5E61A}.Release|x64.ActiveCfg = Release|x64
 		{090C08C3-CC29-4983-8CC2-C47542A5E61A}.Release|x64.Build.0 = Release|x64
+		{5B42C0D4-F23B-4B95-9FD6-A5F752E3B5E3}.Debug|x64.ActiveCfg = Debug|x64
+		{5B42C0D4-F23B-4B95-9FD6-A5F752E3B5E3}.Debug|x64.Build.0 = Debug|x64
+		{5B42C0D4-F23B-4B95-9FD6-A5F752E3B5E3}.Release|x64.ActiveCfg = Release|x64
+		{5B42C0D4-F23B-4B95-9FD6-A5F752E3B5E3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

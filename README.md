@@ -1,6 +1,6 @@
 # Cartridge
 
-Cartridge is a modern, focused NFS client for Windows, optimized for retro gaming scenarios. It evolved from [NFSClient](https://github.com/original/repo), reimagined specifically for serving retro game libraries over the network with minimal latency and maximum reliability.
+Cartridge is a modern, focused NFS client for Windows, optimized for retro gaming scenarios. It evolved from [NFSClient](https://github.com/DeCoRawr/NFSClient), reimagined specifically for serving retro game libraries over the network with minimal latency and maximum reliability.
 
 ## Philosophy
 
@@ -47,7 +47,7 @@ This project is licensed under GPL-3.0, as it builds upon the original NFSClient
 
 ## Acknowledgments
 
-Cartridge builds upon the foundation laid by NFSClient (link to original project). We're grateful for their work in creating a solid NFS client implementation for Windows.
+Cartridge builds upon the foundation laid by [NFSClient](https://github.com/DeCoRawr/NFSClient). We're grateful for their work in creating a solid NFS client implementation for Windows.
 
 ---
 *Cartridge: Because network storage shouldn't feel like network storage.*

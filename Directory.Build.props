@@ -1,0 +1,24 @@
+<Project>
+  <PropertyGroup>
+    <!-- Central build configuration -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>5</WarningLevel>
+
+    <!-- Code analysis -->
+    <AnalysisMode>Recommended</AnalysisMode>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <!-- Output configuration -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <!-- Versioning -->
+    <Version>0.1.0-alpha</Version>
+    <Copyright>Copyright 2024-2025 Cartridge Project</Copyright>
+    <Authors>Cartridge Project</Authors>
+  </PropertyGroup>
+</Project>
